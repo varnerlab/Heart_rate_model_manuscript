@@ -2,16 +2,13 @@
 \documentclass[fleqn,10pt]{wlscirep}
 \title{Scientific Reports Title to see here (20 words or less)}
 
-\author[1,*]{Alice Author}
-\author[2]{Bob Author}
-\author[1,2,+]{Christine Author}
-\author[2,+]{Derek Author}
-\affil[1]{Affiliation, department, city, postcode, country}
-\affil[2]{Affiliation, department, city, postcode, country}
+\author[1]{Rachel LeCover}
+\author[1,*]{Jeffrey D. Varner}
+\affil[1]{Affiliation, School of Chemical and Biomolecular Engineering, Ithaca NY, 14852, USA}
 
-\affil[*]{corresponding.author@email.example}
 
-\affil[+]{these authors contributed equally to this work}
+\affil[*]{jdv27@cornell.edu}
+
 
 %\keywords{Keyword1, Keyword2, Keyword3}
 
@@ -39,6 +36,8 @@ Olufsen and Ottesen have developed models of heart rate based on blood pressure 
 We used the MIMIC II Waveform Database as the source of the pressure and heart rate data used to test this model.\cite{saeed2011multiparameter} MIMIC contains de-identified data from patients who visited the Beth Israel Deaconess Medical Center ICU. This database contains a wealth of information: diagnoses, demographics, clinical data, such as heart rate and intravenous medications as well as laboratory results.  
 A subset of the MIMIC II Waveform Database has been linked to patients found in the MIMIC II Database, allowing us to combine the waveforms with demographic information. From this subset, we selected patients that had numerics records with data recorded once per second with more than five data points available in the first 10 minutes of recorded data, giving us 273 patients meeting this criteria.
 
+To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
+
 \section*{Results}
 
 \subsection*{One Dimensional Optimization of Parameters}
@@ -51,7 +50,9 @@ Through the use of the Clustering Julia package, we created up to 26 clusters ba
 
 
 \subsection*{Multidimensional Optimization}
-We used the Julia language POETs package, which combines simulated anealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. To decrease the time neccessary to perform the simulated annealing, we utilized Julia's transparent parallization capabilities. With the @parallel (+) operator, we were able to calculate patient's mean squarred errors in parallel. The speed up from parallization is shown in \ref{fig:executiontime}. 
+We used the Julia language POETs package, which combines simulated anealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. We used the parameter families from the slower cooling for further analysis. 
+
+To decrease the time neccessary to perform the simulated annealing, we utilized Julia's transparent parallization capabilities. With the @parallel (+) operator, we were able to calculate patient's mean squarred errors in parallel. The speed up from parallization is shown in \ref{fig:executiontime}. 
 
 We then selected the ten best sets of parameters from each cluster to examine the performance of the model with the new parameters. A sample patient from cluster 1 is shown in \ref{fig:cluster1patientmulti}, and from cluster 2 in \ref{fig:cluster2patientmulti}. 
  
