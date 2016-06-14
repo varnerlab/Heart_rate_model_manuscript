@@ -1,0 +1,79 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{olshansky2008parasympathetic}
+\bibinfo{author}{Olshansky, B.}, \bibinfo{author}{Sabbah, H.~N.},
+  \bibinfo{author}{Hauptman, P.~J.} \& \bibinfo{author}{Colucci, W.~S.}
+\newblock \bibinfo{title}{Parasympathetic nervous system and heart failure
+  pathophysiology and potential implications for therapy}.
+\newblock \emph{\bibinfo{journal}{Circulation}} \textbf{\bibinfo{volume}{118}},
+  \bibinfo{pages}{863--871} (\bibinfo{year}{2008}).
+
+\bibitem{ottesen1997modelling}
+\bibinfo{author}{Ottesen, J.~T.}
+\newblock \bibinfo{title}{Modelling of the baroreflex-feedback mechanism with
+  time-delay}.
+\newblock \emph{\bibinfo{journal}{Journal of mathematical biology}}
+  \textbf{\bibinfo{volume}{36}}, \bibinfo{pages}{41--63}
+  (\bibinfo{year}{1997}).
+
+\bibitem{negative1999reflexes}
+\bibinfo{author}{NEGATIVE, A. B. A.~A.}
+\newblock \bibinfo{title}{Reflexes that control cardiovascular function}
+  (\bibinfo{year}{1999}).
+
+\bibitem{olufsen2013practical}
+\bibinfo{author}{Olufsen, M.~S.} \& \bibinfo{author}{Ottesen, J.~T.}
+\newblock \bibinfo{title}{A practical approach to parameter estimation applied
+  to model predicting heart rate regulation}.
+\newblock \emph{\bibinfo{journal}{Journal of mathematical biology}}
+  \textbf{\bibinfo{volume}{67}}, \bibinfo{pages}{39--68}
+  (\bibinfo{year}{2013}).
+
+\bibitem{saeed2011multiparameter}
+\bibinfo{author}{Saeed, M.} \emph{et~al.}
+\newblock \bibinfo{title}{Multiparameter intelligent monitoring in intensive
+  care ii (mimic-ii): a public-access intensive care unit database}.
+\newblock \emph{\bibinfo{journal}{Critical care medicine}}
+  \textbf{\bibinfo{volume}{39}}, \bibinfo{pages}{952} (\bibinfo{year}{2011}).
+
+\bibitem{le1993new}
+\bibinfo{author}{Le~Gall, J.-R.}, \bibinfo{author}{Lemeshow, S.} \&
+  \bibinfo{author}{Saulnier, F.}
+\newblock \bibinfo{title}{A new simplified acute physiology score (saps ii)
+  based on a european/north american multicenter study}.
+\newblock \emph{\bibinfo{journal}{Jama}} \textbf{\bibinfo{volume}{270}},
+  \bibinfo{pages}{2957--2963} (\bibinfo{year}{1993}).
+
+\bibitem{rousseeuw1987silhouettes}
+\bibinfo{author}{Rousseeuw, P.~J.}
+\newblock \bibinfo{title}{Silhouettes: a graphical aid to the interpretation
+  and validation of cluster analysis}.
+\newblock \emph{\bibinfo{journal}{Journal of computational and applied
+  mathematics}} \textbf{\bibinfo{volume}{20}}, \bibinfo{pages}{53--65}
+  (\bibinfo{year}{1987}).
+
+\bibitem{bassen2016jupoets}
+\bibinfo{author}{Bassen, D.}, \bibinfo{author}{Vilkhovoy, M.},
+  \bibinfo{author}{Minot, M.}, \bibinfo{author}{Butcher, J.~T.} \&
+  \bibinfo{author}{Varner, J.~D.}
+\newblock \bibinfo{title}{Jupoets: A constrained multiobjective optimization
+  approach to estimate biochemical model ensembles in the julia programming
+  language}.
+\newblock \emph{\bibinfo{journal}{bioRxiv}} \bibinfo{pages}{056044}
+  (\bibinfo{year}{2016}).
+
+\bibitem{stelling2004robustness}
+\bibinfo{author}{Stelling, J.}, \bibinfo{author}{Gilles, E.~D.} \&
+  \bibinfo{author}{Doyle, F.~J.}
+\newblock \bibinfo{title}{Robustness properties of circadian clock
+  architectures}.
+\newblock \emph{\bibinfo{journal}{Proceedings of the National Academy of
+  Sciences of the United States of America}} \textbf{\bibinfo{volume}{101}},
+  \bibinfo{pages}{13210--13215} (\bibinfo{year}{2004}).
+
+\end{thebibliography}

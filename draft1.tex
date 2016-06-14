@@ -1,0 +1,187 @@
+              
+\documentclass[fleqn,10pt]{wlscirep}
+\title{Scientific Reports Title to see here (20 words or less)}
+
+\author[1,*]{Alice Author}
+\author[2]{Bob Author}
+\author[1,2,+]{Christine Author}
+\author[2,+]{Derek Author}
+\affil[1]{Affiliation, department, city, postcode, country}
+\affil[2]{Affiliation, department, city, postcode, country}
+
+\affil[*]{corresponding.author@email.example}
+
+\affil[+]{these authors contributed equally to this work}
+
+%\keywords{Keyword1, Keyword2, Keyword3}
+
+\begin{abstract}
+Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. Example Abstract. Abstract must be under 200 words and not include subheadings or citations. 
+\end{abstract}
+\begin{document}
+
+\flushbottom
+\maketitle
+% * <john.hammersley@gmail.com> 2015-02-09T12:07:31.197Z:
+%
+%  Click the title above to edit the author information and abstract
+%
+\thispagestyle{empty}
+
+\noindent Please note: Abbreviations should be introduced at the first mention in the main text – no abbreviations lists. Suggested structure of main text (not enforced) is provided below.
+
+\section*{Introduction}
+
+The rate at which a heart beats is determined, in part, by the sympathetic and parasympathetic portions of the nervous system. When the sympathetic nervous system is stimulated, it releases epinephrine and norepinephrine  which increase heart rate. The parasympathetic system releases acetylcholine which decreases heart rate.  These two systems, often described as an accelerator and a brake, are not totally independent on each other, rather, they interact through second messengers cAMP and cGMP. \cite{olshansky2008parasympathetic}
+Heart rate is also controlled by the baroreflex system. The baroreflex system consists of baroreceptors, tension sensitive nerve endings found in the circulatory system. \cite{ottesen1997modelling} When they sense a change in pressure, they cause a change in the frequency of nerve activity. When pressure (and stretch) rapidly increase, so does the baroreceptor firing rate. \cite{negative1999reflexes} This effects of this signal are not instantaneous, rather, there is a time delay on the order of seconds before the sympathetic and parasympathetic nervous systems respond. \cite{ottesen1997modelling}
+Olufsen and Ottesen have developed models of heart rate based on blood pressure measurements.\cite{olufsen2013practical} These models use the baroreflex system and the concentrations of acetylcholine and to predict heart rate. 
+
+We used the MIMIC II Waveform Database as the source of the pressure and heart rate data used to test this model.\cite{saeed2011multiparameter} MIMIC contains de-identified data from patients who visited the Beth Israel Deaconess Medical Center ICU. This database contains a wealth of information: diagnoses, demographics, clinical data, such as heart rate and intravenous medications as well as laboratory results.  
+A subset of the MIMIC II Waveform Database has been linked to patients found in the MIMIC II Database, allowing us to combine the waveforms with demographic information. From this subset, we selected patients that had numerics records with data recorded once per second with more than five data points available in the first 10 minutes of recorded data, giving us 273 patients meeting this criteria.
+
+\section*{Results}
+
+\subsection*{One Dimensional Optimization of Parameters}
+We mimized averaged the mean squared error per patient using the Nelder Mead algorithm as implimented in Julia package Optim. We forced all of the parameters to be non-negative as to be biologically correct.
+
+\subsection*{Clustering}
+We clustered the patients based on their age, average heart rate, and SAPS (Simplified Acute Physiology) score, a measure that estimates a patient's risk of death within an intensive care unit.\cite{le1993new} We used the patient's average SAPS since some patients had mutliple admissions resulting in more than one blood pressure-heart rate track. 
+
+Through the use of the Clustering Julia package, we created up to 26 clusters based on these variables, and scored each cluster with the sum of its silhouettes, where a higher score means that each member of the cluster is more similar to the other members of the clusters.\cite{rousseeuw1987silhouettes} We found that grouping the patients into two clusters gave the highest score and therefore the best clustering. The sum of silouettes as a function of number of clusters is shown in \ref{fig:sumofsils}, and the patients by cluster in \ref{fig:clusteredpatients}. Cluster 1 patients (n = 165), shown in white, tend to have a lower average heart rate (73 BPM compared to 88 BPM), and be older than patients in cluster 2 (n = 108) (69 years vs 59 years, on average). 
+
+
+\subsection*{Multidimensional Optimization}
+We used the Julia language POETs package, which combines simulated anealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. To decrease the time neccessary to perform the simulated annealing, we utilized Julia's transparent parallization capabilities. With the @parallel (+) operator, we were able to calculate patient's mean squarred errors in parallel. The speed up from parallization is shown in \ref{fig:executiontime}. 
+
+We then selected the ten best sets of parameters from each cluster to examine the performance of the model with the new parameters. A sample patient from cluster 1 is shown in \ref{fig:cluster1patientmulti}, and from cluster 2 in \ref{fig:cluster2patientmulti}. 
+ 
+
+\subsection*{Sensitivity Using Finite Differences}
+
+The derivitivies of all parameters were estimated using central differences. 
+\begin{equation}
+\frac{dh}{d\theta_j} = \frac{h(\theta_0+\frac{e_j}{2})-h(\theta_0-\frac{e_j}{2})}{\delta}
+\end{equation}
+where $\delta=10^{-8}*\theta_j$ and $e_j$ is a vector of length $\delta$ in the $j^{th}$ direction.
+To collapse the time dimension, we calculated overall state sensivity coefficents. \cite{stelling2004robustness}
+\begin{equation}
+S_{0j}(t) = \frac{1}{n_s}p_j \left(\sum_{k=1}^{n_t} \sum_{i=1}^{n_s} \left[ \frac{1}{x_i} \frac{dx_i(t_k)}{dp_j} \right]^2 \right)^{1/2}
+\end{equation}
+where $n_s$ = 1, as $h$ is the only state varaiable and $n_t$ is the number of time points available for that patient.
+From the original values provided by Olufsen and Ottesen, we found that $h_0$ was the most sensitive parameter, followed by $N$, $m_{ach}$, and $m_{nor}$ in that order. Of the four most sensitive equations, three of them ($h_0$, $m_{ach}$ and $m_{nor}$) appear directly in the equation for heart rate, and $N$ indirectly appears, as both $c_{ach}$ and $c_{nor}$ are functions of $N$.
+The four parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}.
+
+With the new best parameters, the same four parameters are the most sensitive, as shown in \ref{tab:clusterSensitivity}. 
+
+For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph}.
+
+
+\section*{Discussion}
+
+The Discussion should be succinct and must not contain subheadings.
+
+\section*{Methods}
+
+All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. 
+
+\bibliography{draft1}
+
+
+\section*{Acknowledgements (not compulsory)}
+
+Acknowledgements should be brief, and should not include thanks to anonymous referees and editors, or effusive comments. Grant or contribution numbers may be acknowledged.
+
+\section*{Author contributions statement}
+
+Must include all authors, identified by initials, for example:
+A.A. conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A. and D.A. analysed the results.  All authors reviewed the manuscript. 
+
+\section*{Additional information}
+
+To include, in this order: \textbf{Accession codes} (where applicable); \textbf{Competing financial interests} (mandatory statement). 
+
+The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
+\begin{figure}[ht]
+		\centering
+	\includegraphics[width=\linewidth]{figures/2clusters}
+       \caption{The patients, clustered into two groups.}
+       \label{fig:clusteredpatients}
+\end{figure}
+
+\begin{figure}[ht]
+		\centering
+	\includegraphics[width=\linewidth]{figures/timedatausingdifferentparamsetsforpatients28611-3018-03-06-18-24n}
+       \caption{Performance of the model on a patient in cluster 1. The x represent the true heart rate, the black dots are the mean model prediction from the family of best parameter sets, and the grey gives a 95\% confidence interval.}
+       \label{fig:cluster1patientmulti}
+\end{figure}
+
+\begin{figure}[ht]
+		\centering
+	\includegraphics[width=\linewidth]{figures/timedatausingdifferentparamsetsforpatients32582-3106-02-22-22-22n}
+       \caption{Performance of the model on a patient in cluster 2. The x represent the true heart rate, the black dots are the mean model prediction from the family of best parameter sets, and the grey gives a 95\% confidence interval.}
+       \label{fig:cluster2patientmulti}
+\end{figure}
+
+
+\begin{figure}[ht]
+		\centering
+       \includegraphics[width=\linewidth]{figures/sumofsilhouettesasafunctionofclustersjustAgeSAPSavgHR}
+       \caption{Sum of silhouettes as function of number of clusters}
+       \label{fig:sumofsils}
+\end{figure}
+
+\begin{figure}[ht]
+       \centering
+       \includegraphics[width=\linewidth]{figures/runtimecomparison}
+       \caption{Switching from serial to parallel computation resulted in a significant speed up. In parallel operation, six cores were used.}
+       	\label{fig:MultiobjectiveSensitivityGraph}
+\end{figure}
+
+\begin{figure}[ht]
+       \centering
+       \includegraphics[width=\linewidth]{figures/MultiobjectiveSenstivityGraph}
+       \caption{The black circles are from cluster 1, the grey x's represent cluster 2.}
+       	\label{fig:MultiobjectiveSensitivityGraph}
+\end{figure} 
+
+\begin{figure}[ht]
+       \centering
+       \includegraphics[width=\linewidth]{figures/2runsmultiobjective}
+       \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
+       \label{fig:tradeoffcurve}
+\end{figure}
+
+\begin{figure}[ht]
+       \centering
+       \includegraphics[width=\linewidth]{figures/fastercoolingtradeoff}
+       \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
+       \label{fig:tradeoffcurveslower}
+\end{figure}
+
+
+\begin{table}[h]
+\centering
+\caption{Average Overall State Sensitivity Coefficents Using Original Parameters}
+\label{tab:OSSCsoriginalParams}
+\begin{tabular}{lllllllll}
+$\frac{dh}{dN}$    & $\frac{dh}{dk_1}$  & $\frac{dh}{d\tau_1}$ & $\frac{dh}{d\tau_2}$ &$\frac{dh}{d\tau_{ach}}$ & $\frac{dh}{d\tau_{nor}}$ & $\frac{dh}{dh_0}$   & $\frac{dh}{dm_{nor}}$ & $\frac{dh}{dm_{ach}}$ \\
+15.3620 & 0.0792 & 0.0740  & 0.0156  & 0.0540   & 0.0006    & 19.9294 & 0.5740  & 14.5868
+\end{tabular}
+\end{table} 
+
+\begin{table}[]
+\centering
+\caption{Sensitivity by clusters}
+\label{tab:clusterSensitivity}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Cluster   & $\frac{dh}{dN}$ & $\frac{dh}{k_1}$ & $\frac{dh}{\tau_1}$ & $\frac{dh}{tau_2}$ & $\frac{dh}{\tau_{ach}}$ & $\frac{dh}{\tau_{nor}}$ & $\frac{dh}{h0}$ & $\frac{dh}{m_{nor}}$ & $\frac{dh}{m_{ach}}$ \\ \hline
+Overall   & 4.8352          & 0.2500           & 0.5088              & 0.0033             & 0.0204                  & 0.5720                  & 19.9294         & 1.1339               & 4.4651               \\ \hline
+cluster 1 & 4.7152          & 0.2456           & 0.5027              & 0.0033             & 0.0201                  & 0.5755                  & 19.4780         & 1.1438               & 4.3593               \\ \hline
+cluster 2 & 4.9137          & 0.2528           & 0.5128              & 0.0033             & 0.0206                  & 0.5697                  & 20.2248         & 1.1275               & 4.5344               \\ \hline
+\end{tabular}
+\end{table}
+
+\end{document}
+              
+            
