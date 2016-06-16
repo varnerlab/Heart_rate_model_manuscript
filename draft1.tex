@@ -22,6 +22,7 @@ Example Abstract. Abstract must be under 200 words and not include subheadings o
 The rate at which a heart beats is determined, in part, by the sympathetic and parasympathetic portions of the nervous system. When the sympathetic nervous system is stimulated, it releases epinephrine and norepinephrine  which increase heart rate. The parasympathetic system releases acetylcholine which decreases heart rate.  These two systems, often described as an accelerator and a brake, are not totally independent on each other, rather, they interact through second messengers cAMP and cGMP. \cite{olshansky2008parasympathetic}
 Heart rate is also controlled by the baroreflex system. The baroreflex system consists of baroreceptors, tension sensitive nerve endings found in the circulatory system. \cite{ottesen1997modelling} When they sense a change in pressure, they cause a change in the frequency of nerve activity. When pressure (and stretch) rapidly increase, so does the baroreceptor firing rate. \cite{negative1999reflexes} This effects of this signal are not instantaneous, rather, there is a time delay on the order of seconds before the sympathetic and parasympathetic nervous systems respond. \cite{ottesen1997modelling}
 Olufsen and Ottesen have developed models of heart rate based on blood pressure measurements.\cite{olufsen2013practical} These models use the baroreflex system and the concentrations of acetylcholine and to predict heart rate. 
+
 We used the MIMIC II Waveform Database as the source of the pressure and heart rate data used to test this model.\cite{saeed2011multiparameter} MIMIC contains de-identified data from patients who visited the Beth Israel Deaconess Medical Center ICU. This database contains a wealth of information: diagnoses, demographics, clinical data, such as heart rate and intravenous medications as well as laboratory results.  
 A subset of the MIMIC II Waveform Database has been linked to patients found in the MIMIC II Database, allowing us to combine the waveforms with demographic information. From this subset, we selected patients that had numerics records with data recorded once per second with more than five data points available in the first 10 minutes of recorded data, giving us 273 patients meeting this criteria.
 To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
@@ -93,7 +94,7 @@ The corresponding author is responsible for submitting a \href{http://www.nature
        \centering
        \includegraphics[width=\linewidth]{figures/runtimecomparison}
        \caption{Switching from serial to parallel computation resulted in a significant speed up. In parallel operation, six cores were used.}
-        \label{fig:MultiobjectiveSensitivityGraph}
+        \label{fig:executiontime}
 \end{figure}
 \begin{figure}[ht]
        \centering
@@ -103,13 +104,13 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 \end{figure} 
 \begin{figure}[ht]
        \centering
-       \includegraphics[width=\linewidth]{figures/2runsmultiobjective}
+       \includegraphics[width=\linewidth]{figures/TradeOffCurveFasterCooling}
        \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
        \label{fig:tradeoffcurve}
 \end{figure}
 \begin{figure}[ht]
        \centering
-       \includegraphics[width=\linewidth]{figures/fastercoolingtradeoff}
+       \includegraphics[width=\linewidth]{figures/TradeOffCurveSlowerCooling}
        \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
        \label{fig:tradeoffcurveslower}
 \end{figure}
