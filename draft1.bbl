@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
@@ -40,6 +40,14 @@
   care ii (mimic-ii): a public-access intensive care unit database}.
 \newblock \emph{\bibinfo{journal}{Critical care medicine}}
   \textbf{\bibinfo{volume}{39}}, \bibinfo{pages}{952} (\bibinfo{year}{2011}).
+
+\bibitem{baker1997pitfalls}
+\bibinfo{author}{Baker, C.~T.} \& \bibinfo{author}{Paul, C.~A.}
+\newblock \bibinfo{title}{Pitfalls in parameter estimation for delay
+  differential equations}.
+\newblock \emph{\bibinfo{journal}{SIAM Journal on Scientific Computing}}
+  \textbf{\bibinfo{volume}{18}}, \bibinfo{pages}{305--314}
+  (\bibinfo{year}{1997}).
 
 \bibitem{le1993new}
 \bibinfo{author}{Le~Gall, J.-R.}, \bibinfo{author}{Lemeshow, S.} \&

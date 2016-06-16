@@ -4,45 +4,45 @@ The top-level auxiliary file: draft1.aux
 The style file: naturemag.bst
 Database file #1: draft1.bib
 Warning--empty journal in negative1999reflexes
-You've used 9 entries,
+You've used 10 entries,
             2348 wiz_defined-function locations,
-            1041 strings with 10744 characters,
-and the built_in function-call counts, 3582 in all, are:
-= -- 260
-> -- 88
+            1048 strings with 10922 characters,
+and the built_in function-call counts, 3983 in all, are:
+= -- 291
+> -- 96
 < -- 0
-+ -- 44
-- -- 22
-* -- 426
-:= -- 400
-add.period$ -- 26
-call.type$ -- 9
-change.case$ -- 9
++ -- 48
+- -- 24
+* -- 476
+:= -- 446
+add.period$ -- 29
+call.type$ -- 10
+change.case$ -- 10
 chr.to.int$ -- 0
-cite$ -- 10
-duplicate$ -- 327
-empty$ -- 322
-format.name$ -- 28
-if$ -- 715
+cite$ -- 11
+duplicate$ -- 362
+empty$ -- 359
+format.name$ -- 31
+if$ -- 794
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 73
-newline$ -- 52
-num.names$ -- 9
-pop$ -- 58
+int.to.str$ -- 10
+missing$ -- 81
+newline$ -- 57
+num.names$ -- 10
+pop$ -- 63
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 67
+skip$ -- 71
 stack$ -- 0
-substring$ -- 171
-swap$ -- 319
+substring$ -- 196
+swap$ -- 354
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 23
-width$ -- 10
-write$ -- 103
+while$ -- 26
+width$ -- 12
+write$ -- 114
 (There was 1 warning)

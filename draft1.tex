@@ -28,8 +28,11 @@ A subset of the MIMIC II Waveform Database has been linked to patients found in 
 To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
 \section*{Results}
 \subsection*{One Dimensional Optimization of Parameters}
-We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package Optim. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in \ref{tab:SingleParams}. The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. 
+We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package Optim. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in \ref{tab:SingleParams}. The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. 
+
 $k_1$ and $\beta$ were held constant as to reduce the search space. $\alpha$, the parameter used to smooth the pressure data was held constant at 1.5 to smooth the data with a minimal phase shift. The maximum firing rate, $M$, was held constant, as it only appears in this system of equations by normalizing $n$. The sympathetic nervous system delay, $\tau_d$, was held constant, owing to the propagation of discontinuities. \cite{baker1997pitfalls}
+
+
 \subsection*{Clustering}
 We clustered the patients based on their age, average heart rate, and SAPS (Simplified Acute Physiology) score, a measure that estimates a patient's risk of death within an intensive care unit.\cite{le1993new} We used the patient's average SAPS since some patients had multiple admissions resulting in more than one blood pressure-heart rate track. 
 Through the use of the Clustering Julia package, we created up to 26 clusters based on these variables, and scored each cluster with the sum of its silhouettes, where a higher score means that each member of the cluster is more similar to the other members of the clusters.\cite{rousseeuw1987silhouettes} We found that grouping the patients into two clusters gave the highest score and therefore the best clustering. The sum of silhouettes as a function of number of clusters is shown in \ref{fig:sumofsils}, and the patients by cluster in \ref{fig:clusteredpatients}. Cluster 1 patients (n = 165), shown in white, tend to have a lower average heart rate (73 BPM compared to 88 BPM), and be older than patients in cluster 2 (n = 108) (69 years vs 59 years, on average). 
@@ -66,12 +69,21 @@ A.A. conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.
 \section*{Additional information}
 To include, in this order: \textbf{Accession codes} (where applicable); \textbf{Competing financial interests} (mandatory statement). 
 The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
+
+\begin{figure}[ht]
+                \centering
+        \includegraphics[width=\linewidth]{figures/paramscomparisons28611-3108-03-06-18-24n}
+       \caption{The black xs are the measured heart rate, the dark gray is the model prediction using the original parameters and the light gray is the model prediction using the original parameters.}
+       \label{fig:paramscomparsion}
+\end{figure}
+
 \begin{figure}[ht]
                 \centering
         \includegraphics[width=\linewidth]{figures/2clusters}
        \caption{The patients, clustered into two groups.}
        \label{fig:clusteredpatients}
 \end{figure}
+
 \begin{figure}[ht]
                 \centering
         \includegraphics[width=\linewidth]{figures/timedatausingdifferentparamsetsforpatients28611-3018-03-06-18-24n}
