@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.4)  16 JUN 2016 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.4)  16 JUN 2016 14:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -975,15 +975,10 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 19.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 19.
-
-
-LaTeX Warning: Citation `baker1997pitfalls' on page 1 undefined on input line 3
-3.
-
-[1
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./draft1.bbl [2])
-<figures/paramscomparisons28611-3108-03-06-18-24n.png, id=75, 769.87625pt x 573
+<figures/paramscomparisons28611-3108-03-06-18-24n.png, id=76, 769.87625pt x 573
 .14125pt>
 File: figures/paramscomparisons28611-3108-03-06-18-24n.png Graphic file (type p
 ng)
@@ -992,7 +987,7 @@ Package pdftex.def Info: figures/paramscomparisons28611-3108-03-06-18-24n.png u
 sed on input line 75.
 (pdftex.def)             Requested size: 500.484pt x 372.59862pt.
 
-<figures/2clusters.png, id=76, 578.16pt x 433.62pt>
+<figures/2clusters.png, id=77, 578.16pt x 433.62pt>
 File: figures/2clusters.png Graphic file (type png)
 
 <use figures/2clusters.png>
@@ -1000,7 +995,7 @@ Package pdftex.def Info: figures/2clusters.png used on input line 82.
 (pdftex.def)             Requested size: 500.484pt x 375.36066pt.
 
 <figures/timedatausingdifferentparamsetsforpatients28611-3018-03-06-18-24n.png,
- id=78, 767.86874pt x 576.1525pt>
+ id=79, 767.86874pt x 576.1525pt>
 File: figures/timedatausingdifferentparamsetsforpatients28611-3018-03-06-18-24n
 .png Graphic file (type png)
 
@@ -1011,7 +1006,7 @@ Package pdftex.def Info: figures/timedatausingdifferentparamsetsforpatients2861
 (pdftex.def)             Requested size: 500.484pt x 375.53206pt.
 
 <figures/timedatausingdifferentparamsetsforpatients32582-3106-02-22-22-22n.png,
- id=79, 966.61125pt x 717.68124pt>
+ id=80, 966.61125pt x 717.68124pt>
 File: figures/timedatausingdifferentparamsetsforpatients32582-3106-02-22-22-22n
 .png Graphic file (type png)
 
@@ -1021,7 +1016,7 @@ Package pdftex.def Info: figures/timedatausingdifferentparamsetsforpatients3258
 2-3106-02-22-22-22n.png used on input line 95.
 (pdftex.def)             Requested size: 500.484pt x 371.59756pt.
 
-<figures/sumofsilhouettesasafunctionofclustersjustAgeSAPSavgHR.png, id=80, 578.
+<figures/sumofsilhouettesasafunctionofclustersjustAgeSAPSavgHR.png, id=81, 578.
 16pt x 433.62pt>
 File: figures/sumofsilhouettesasafunctionofclustersjustAgeSAPSavgHR.png Graphic
  file (type png)
@@ -1031,22 +1026,24 @@ Package pdftex.def Info: figures/sumofsilhouettesasafunctionofclustersjustAgeSA
 PSavgHR.png used on input line 101.
 (pdftex.def)             Requested size: 500.484pt x 375.36066pt.
 
-<figures/runtimecomparison.png, id=81, 594.22pt x 355.3275pt>
+<figures/runtimecomparison.png, id=82, 594.22pt x 355.3275pt>
 File: figures/runtimecomparison.png Graphic file (type png)
 
 <use figures/runtimecomparison.png>
 Package pdftex.def Info: figures/runtimecomparison.png used on input line 107.
 (pdftex.def)             Requested size: 500.484pt x 299.28633pt.
 
-<figures/MultiobjectiveSenstivityGraph.png, id=82, 578.16pt x 433.62pt>
-File: figures/MultiobjectiveSenstivityGraph.png Graphic file (type png)
+<figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBars.png, id=83, 578.1
+6pt x 433.62pt>
+File: figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBars.png Graphic 
+file (type png)
 
-<use figures/MultiobjectiveSenstivityGraph.png>
-Package pdftex.def Info: figures/MultiobjectiveSenstivityGraph.png used on inpu
-t line 113.
+<use figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBars.png>
+Package pdftex.def Info: figures/MultiobjectiveSenstivityGraph10familiesofNoErr
+orBars.png used on input line 113.
 (pdftex.def)             Requested size: 500.484pt x 375.36066pt.
 
-<figures/TradeOffCurveFasterCooling.png, id=83, 578.16pt x 433.62pt>
+<figures/TradeOffCurveFasterCooling.png, id=84, 578.16pt x 433.62pt>
 File: figures/TradeOffCurveFasterCooling.png Graphic file (type png)
 
 <use figures/TradeOffCurveFasterCooling.png>
@@ -1054,7 +1051,7 @@ Package pdftex.def Info: figures/TradeOffCurveFasterCooling.png used on input l
 ine 119.
 (pdftex.def)             Requested size: 500.484pt x 375.36066pt.
 
-<figures/TradeOffCurveSlowerCooling.png, id=84, 578.16pt x 433.62pt>
+<figures/TradeOffCurveSlowerCooling.png, id=85, 578.16pt x 433.62pt>
 File: figures/TradeOffCurveSlowerCooling.png Graphic file (type png)
 
 <use figures/TradeOffCurveSlowerCooling.png>
@@ -1077,18 +1074,16 @@ AED: lastpage setting LastPage
 018-03-06-18-24n.png>] [7 <./figures/timedatausingdifferentparamsetsforpatients
 32582-3106-02-22-22-22n.png>] [8 <./figures/sumofsilhouettesasafunctionofcluste
 rsjustAgeSAPSavgHR.png>] [9 <./figures/runtimecomparison.png>] [10 <./figures/M
-ultiobjectiveSenstivityGraph.png>] [11 <./figures/TradeOffCurveFasterCooling.pn
-g>] [12 <./figures/TradeOffCurveSlowerCooling.png>]
+ultiobjectiveSenstivityGraph10familiesofNoErrorBars.png>] [11 <./figures/TradeO
+ffCurveFasterCooling.png>] [12 <./figures/TradeOffCurveSlowerCooling.png>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
- (./draft1.aux)
+
+(./draft1.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
 Package rerunfilecheck Info: File `draft1.out' has not changed.
 (rerunfilecheck)             Checksum: 28A1F51D71CF89FFF9B806EF30381E93;48.
-
-
-LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
@@ -1096,13 +1091,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
  ) 
 Here is how much of TeX's memory you used:
- 11779 strings out of 494910
- 174692 string characters out of 6179837
- 420814 words of memory out of 5000000
+ 11781 strings out of 494910
+ 174834 string characters out of 6179837
+ 420901 words of memory out of 5000000
  14656 multiletter control sequences out of 15000+600000
- 56174 words of font info for 199 fonts, out of 8000000 for 9000
+ 55186 words of font info for 200 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 43i,11n,45p,809b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,11n,45p,845b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -1114,10 +1109,10 @@ r/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
 es/utmri8a.pfb>
-Output written on draft1.pdf (12 pages, 406692 bytes).
+Output written on draft1.pdf (12 pages, 404270 bytes).
 PDF statistics:
- 191 PDF objects out of 1000 (max. 8388607)
- 150 compressed objects within 2 object streams
+ 192 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  37 named destinations out of 1000 (max. 500000)
  39478 words of extra memory for PDF output out of 42996 (max. 10000000)
 
