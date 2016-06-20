@@ -29,7 +29,9 @@ A subset of the MIMIC II Waveform Database has been linked to patients found in 
 To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
 \section*{Results}
 \subsection*{One Dimensional Optimization of Parameters}
-We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package Optim. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in Table \ref{tab:SingleParams}. The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in Figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. The change in parameters reduced the mean squared error, averaged over all of the selected patients, from 1167 to 349.
+We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package NLopt. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in Table \ref{tab:SingleParamsNLopt}. %The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in Figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. The change in parameters reduced the mean squared error, averaged over all of the selected patients, from 1167 to 349.
+
+Within the estimated parameter set, the value of $N$, the baseline firing rate increased, and both $k_1$ and $\tau_1$, representing a change in the response rate of the faster firing baroreceptors in the model.The baseline heart rate ($h_0$) decreased slightly, to 88 bpm, from the initial 100 bpm. Both $\tau_{ach}$ and $m_{ach}$, which determine how acetylcholine plays into the model, decreased dramatically in the estimated parameter set, with the reduction in $m_{ach}$ reducing the effects of a change in acetylcholine on heart rate, and the decrease in $\tau_{ach}$ increasing the rate of acetylcholine change. The estimated parameter set reduced the averaged mean squared error to 352 from 1167. As seen in Figure \ref{fig:paramscomparsionNLopt}, the estimated parameters slightly overestimate heart rate for this patient, but they perform far better than the original parameters, which severely underestimate the heart rate. 
 
 $k_1$ and $\beta$ were held constant as to reduce the search space. $\alpha$, the parameter used to smooth the pressure data was held constant at 1.5 to smooth the data with a minimal phase shift. The maximum firing rate, $M$, was held constant, as it only appears in this system of equations by normalizing $n$. The sympathetic nervous system delay, $\tau_d$, was held constant, owing to the propagation of discontinuities. \cite{baker1997pitfalls}
 
@@ -71,12 +73,20 @@ A.A. conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.
 To include, in this order: \textbf{Accession codes} (where applicable); \textbf{Competing financial interests} (mandatory statement). 
 The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
 
+%\begin{figure}[ht]
+%                \centering
+%        \includegraphics[width=\linewidth]{figures/paramscomparisons28611-3108-03-06-18-24n}
+%       \caption{The black xs are the measured heart rate, the dark gray is the model prediction using the original parameters and the light gray is the model prediction using the original parameters.}
+%       \label{fig:paramscomparsion}
+%\end{figure}
+
 \begin{figure}[ht]
                 \centering
-        \includegraphics[width=\linewidth]{figures/paramscomparisons28611-3108-03-06-18-24n}
+        \includegraphics[width=\linewidth]{figures/s27193-3271-03-15-13-26n}
        \caption{The black xs are the measured heart rate, the dark gray is the model prediction using the original parameters and the light gray is the model prediction using the original parameters.}
-       \label{fig:paramscomparsion}
+       \label{fig:paramscomparsionNLopt}
 \end{figure}
+
 
 \begin{figure}[ht]
                 \centering
@@ -127,17 +137,33 @@ The corresponding author is responsible for submitting a \href{http://www.nature
        \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
        \label{fig:tradeoffcurveslower}
 \end{figure}
+
+
+%\begin{table}[ht]
+%\centering
+%\caption{Original and estimated parameter values. The bolded parameters were held constant.}
+%\label{tab:SingleParamsOptim}
+%\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+%\hline
+%Parameter                                 & \textbf{$\alpha$} & $N$    & \textbf{$M$} & $k_1$ & \textbf{$k_2$} & $\tau_1$ & $\tau_2$ & $\tau_{ach}$ & $\tau_{nor}$ & \textbf{$\beta$} & $h_0$ & $m_{nor}$ & $m_{ach}$ & \textbf{$\tau_d$} \\ \hline
+%Original Value                            & 1.5               & 75     & 120          & 1.5   & 0.5            & 0.5      & 250      & 0.5          & 0.5          & 6                & 1.67  & 0.96      & 0.7       & 7                 \\ \hline
+%Parameter Estimations from MIMIC II  Data & 1.5               & 75.319 & 120          & 2.299 & 0.5            & 1.345    & 0.126    & 250.339      & 3.185        & 6                & 1.412 & 0.160     & 2.35E-06  & 7                 \\ \hline
+%\end{tabular}
+%\end{table}
+
 \begin{table}[ht]
 \centering
 \caption{Original and estimated parameter values. The bolded parameters were held constant.}
-\label{tab:SingleParams}
+\label{tab:SingleParamsNLopt}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-Parameter                                 & \textbf{$\alpha$} & $N$    & \textbf{$M$} & $k_1$ & \textbf{$k_2$} & $\tau_1$ & $\tau_2$ & $\tau_{ach}$ & $\tau_{nor}$ & \textbf{$\beta$} & $h_0$ & $m_{nor}$ & $m_{ach}$ & \textbf{$\tau_d$} \\ \hline
-Original Value                            & 1.5               & 75     & 120          & 1.5   & 0.5            & 0.5      & 250      & 0.5          & 0.5          & 6                & 1.67  & 0.96      & 0.7       & 7                 \\ \hline
-Parameter Estimations from MIMIC II  Data & 1.5               & 75.319 & 120          & 2.299 & 0.5            & 1.345    & 0.126    & 250.339      & 3.185        & 6                & 1.412 & 0.160     & 2.35E-06  & 7                 \\ \hline
+Parameter                                 & \textbf{$\alpha$} & $N$    & \textbf{$M$} & $k_1$  & \textbf{$k_2$} & $\tau_1$ & $\tau_2$ & $\tau_{ach}$ & $\tau_{nor}$ & \textbf{$\beta$} & $h_0$ & $m_{nor}$ & $m_{ach}$ & \textbf{$\tau_d$} \\ \hline
+Original Value                            & \textbf{1.5}      & 75     & \textbf{120} & 1.5    & \textbf{0.5}   & 0.5      & 250      & 0.5          & 0.5          & \textbf{6}       & 1.67  & 0.96      & 0.7       & \textbf{7}        \\ \hline
+Parameter Estimations from MIMIC II  Data & \textbf{1.5}      & 107.33 & \textbf{120} & 41.139 & \textbf{0.5}   & 14.062   & 202.925  & 2.94E-05     & 8.156        & \textbf{6}       & 1.474 & 0.165     & 5.20E-02  & \textbf{7}        \\ \hline
 \end{tabular}
 \end{table}
+
+
 \begin{table}[h]
 \centering
 \caption{Average Overall State Sensitivity Coefficents Using Original Parameters}
