@@ -1,12 +1,13 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: draft1.aux
 The style file: naturemag.bst
 Database file #1: draft1.bib
+Warning--I didn't find a database entry for "ottesen1996non"
 Warning--empty journal in negative1999reflexes
 You've used 10 entries,
             2348 wiz_defined-function locations,
-            1048 strings with 10922 characters,
+            1049 strings with 10936 characters,
 and the built_in function-call counts, 3983 in all, are:
 = -- 291
 > -- 96
@@ -45,4 +46,4 @@ warning$ -- 1
 while$ -- 26
 width$ -- 12
 write$ -- 114
-(There was 1 warning)
+(There were 2 warnings)
