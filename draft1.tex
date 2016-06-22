@@ -45,6 +45,8 @@ Through the use of the Clustering Julia package, we created up to 26 clusters ba
 We used the Julia language POETs package, which combines simulated anealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. We used the parameter families from the slower cooling for further analysis. 
 To decrease the time necessary to perform the simulated annealing, we utilized Julia's transparent parallelization capabilities. With the @parallel (+) operator, we were able to calculate patient's mean squarred errors in parallel. The speed up from parallelization is shown in \ref{fig:executiontime}. 
 We then selected the ten best sets of parameters from each cluster to examine the performance of the model with the new parameters. A sample patient from cluster 1 is shown in \ref{fig:cluster1patientmulti}, and from cluster 2 in \ref{fig:cluster2patientmulti}. The new parameter families reduced the averaged mean squared error even further than the parameters estimated using Nelder Mead-the ten best families for cluster 1 reduced the averaged mean squared error to 135 or less, and for cluster two, the averaged mean squared error was reduced to 178, or less. 
+
+Both of the families had fairly similar values for $m_{nor}$ and $m_{ach}$, however, cluster 1 had a larger value of $N$, the resting firing rate than cluster 2. Cluster 1 contains the older patients, on average, suggesting that the resting firing rate may be age dependent. The differences in average heart rate between the clusters apparent in the clustering are appearent in the difference in $h_0$ between the two clusters, with cluster 2 having a faster base line heart rate, at $1.749 \pm .05$ beats per second, corresponding to $104.95 \pm 3$ beats per minute, compared to $74.4 \pm 4$ beats per minute for cluster 1.
  
 \subsection*{Sensitivity Using Finite Differences}
 The derivatives of all parameters were estimated using central differences. 
@@ -155,6 +157,7 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 
 \begin{table}[ht]
 \centering
+\scriptsize
 \caption{Original and estimated parameter values. The bolded parameters were held constant.}
 \label{tab:SingleParamsNLopt}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
@@ -162,6 +165,19 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 Parameter                                 & \textbf{$\alpha$} & $N$    & \textbf{$M$} & $k_1$  & \textbf{$k_2$} & $\tau_1$ & $\tau_2$ & $\tau_{ach}$ & $\tau_{nor}$ & \textbf{$\beta$} & $h_0$ & $m_{nor}$ & $m_{ach}$ & \textbf{$\tau_d$} \\ \hline
 Original Value                            & \textbf{1.5}      & 75     & \textbf{120} & 1.5    & \textbf{0.5}   & 0.5      & 250      & 0.5          & 0.5          & \textbf{6}       & 1.67  & 0.96      & 0.7       & \textbf{7}        \\ \hline
 Parameter Estimations from MIMIC II  Data & \textbf{1.5}      & 107.33 & \textbf{120} & 41.139 & \textbf{0.5}   & 14.062   & 202.925  & 2.94E-05     & 8.156        & \textbf{6}       & 1.474 & 0.165     & 5.20E-02  & \textbf{7}        \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\scriptsize
+\caption{Average parameter values for the 10 best sets per cluster. Data is reported as mean $\pm$ stdev. Bolded columns were held constant.}
+\label{tab:MultiobjectiveParams}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \textbf{$k_2$} & $\tau_1$       & $\tau_2$        & $\tau_{ach}$   & $\tau_{nor}$   & \textbf{$\beta$} & $h_0$           & $m_{nor}$      & $m_{ach}$       & \textbf{$\tau_d$} \\ \hline
+1       & \textbf{1.5}      & $50.36\pm 9$ & \textbf{120} & $.9566 \pm .3$ & \textbf{0.5}   & $.1854\pm .13$ & $127.31 \pm 46$ & $.5968 \pm .4$ & $.3176\pm .06$ & \textbf{6}       & $1.245\pm .006$ & $.1816\pm .02$ & $.0434\pm .004$ & \textbf{7}        \\ \hline
+2       & \textbf{1.5}      & $37.98\pm 9$ & \textbf{120} & $1.379\pm .7$  & \textbf{0.5}   & $.3621\pm .11$ & $82.88\pm 33$   & $.1410\pm .06$ & $.1688\pm.04$  & \textbf{6}       & $1.749\pm.05$   & $.1609\pm.02$  & $.0962\pm .06$  & \textbf{7}        \\ \hline
 \end{tabular}
 \end{table}
 
@@ -175,18 +191,18 @@ $\frac{dh}{dN}$    & $\frac{dh}{dk_1}$  & $\frac{dh}{d\tau_1}$ & $\frac{dh}{d\ta
 15.3620 & 0.0792 & 0.0740  & 0.0156  & 0.0540   & 0.0006    & 19.9294 & 0.5740  & 14.5868
 \end{tabular}
 \end{table} 
-\begin{table}[]
-\centering
-\caption{Sensitivity by clusters}
-\label{tab:clusterSensitivity}
-\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
-\hline
-Cluster   & $\frac{dh}{dN}$ & $\frac{dh}{k_1}$ & $\frac{dh}{\tau_1}$ & $\frac{dh}{tau_2}$ & $\frac{dh}{\tau_{ach}}$ & $\frac{dh}{\tau_{nor}}$ & $\frac{dh}{h0}$ & $\frac{dh}{m_{nor}}$ & $\frac{dh}{m_{ach}}$ \\ \hline
-Overall   & 4.8352          & 0.2500           & 0.5088              & 0.0033             & 0.0204                  & 0.5720                  & 19.9294         & 1.1339               & 4.4651               \\ \hline
-cluster 1 & 4.7152          & 0.2456           & 0.5027              & 0.0033             & 0.0201                  & 0.5755                  & 19.4780         & 1.1438               & 4.3593               \\ \hline
-cluster 2 & 4.9137          & 0.2528           & 0.5128              & 0.0033             & 0.0206                  & 0.5697                  & 20.2248         & 1.1275               & 4.5344               \\ \hline
-\end{tabular}
-\end{table}
+%\begin{table}[]
+%\centering
+%\caption{Sensitivity by clusters}
+%\label{tab:clusterSensitivity}
+%\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+%\hline
+%Cluster   & $\frac{dh}{dN}$ & $\frac{dh}{k_1}$ & $\frac{dh}{\tau_1}$ & $\frac{dh}{tau_2}$ & $\frac{dh}{\tau_{ach}}$ & $\frac{dh}{\tau_{nor}}$ & $\frac{dh}{h0}$ & $\frac{dh}{m_{nor}}$ & $\frac{dh}{m_{ach}}$ \\ \hline
+%Overall   & 4.8352          & 0.2500           & 0.5088              & 0.0033             & 0.0204                  & 0.5720                  & 19.9294         & 1.1339               & 4.4651               \\ \hline
+%cluster 1 & 4.7152          & 0.2456           & 0.5027              & 0.0033             & 0.0201                  & 0.5755                  & 19.4780         & 1.1438               & 4.3593               \\ \hline
+%cluster 2 & 4.9137          & 0.2528           & 0.5128              & 0.0033             & 0.0206                  & 0.5697                  & 20.2248         & 1.1275               & 4.5344               \\ \hline
+%\end{tabular}
+%\end{table}
 \end{document}
               
             
