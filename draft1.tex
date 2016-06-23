@@ -58,10 +58,11 @@ To collapse the time dimension, we calculated overall state sensitivity coeffici
 \begin{equation}
 S_{0j}(t) = \frac{1}{n_s}p_j \left(\sum_{k=1}^{n_t} \sum_{i=1}^{n_s} \left[ \frac{1}{x_i} \frac{dx_i(t_k)}{dp_j} \right]^2 \right)^{1/2}
 \end{equation}
-where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of time points available for that patient.
+where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of time points available for that patient. We calculated sensitivites of parameters that were optimized and not that of those held constant.
+\subsubsection*{Single Objective Sensitivity}
 From the original values provided by Olufsen and Ottesen, we found that $h_0$ was the most sensitive parameter, followed by $N$, $m_{ach}$, and $m_{nor}$ in that order. Of the four most sensitive equations, three of them ($h_0$, $m_{ach}$ and $m_{nor}$) appear directly in the equation for heart rate, and $N$ indirectly appears, as both $c_{ach}$ and $c_{nor}$ are functions of $N$.
 The four parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}.
-With the new best parameters, the same four parameters are the most sensitive, as shown in \ref{tab:clusterSensitivity}. 
+\subsubsection*{Multiobjective Sensitivity} 
 For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph}.
 \section*{Discussion}
 The Discussion should be succinct and must not contain subheadings.
@@ -184,11 +185,13 @@ Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \te
 
 \begin{table}[h]
 \centering
-\caption{Average Overall State Sensitivity Coefficents Using Original Parameters}
+\caption{Average Overall State Sensitivity Coefficents For Single Objective Case}
 \label{tab:OSSCsoriginalParams}
-\begin{tabular}{lllllllll}
-$\frac{dh}{dN}$    & $\frac{dh}{dk_1}$  & $\frac{dh}{d\tau_1}$ & $\frac{dh}{d\tau_2}$ &$\frac{dh}{d\tau_{ach}}$ & $\frac{dh}{d\tau_{nor}}$ & $\frac{dh}{dh_0}$   & $\frac{dh}{dm_{nor}}$ & $\frac{dh}{dm_{ach}}$ \\
-15.3620 & 0.0792 & 0.0740  & 0.0156  & 0.0540   & 0.0006    & 19.9294 & 0.5740  & 14.5868
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+Parameter set        & $S_{N}$    & $S_{k_1}$ & $S_{\tau_1}$ & $S_{\tau_2}$ & $S_{\tau_{ach}}$ & $S_{\tau_{nor}}$ & $S_{h_0}$   & $S_{m_{ach}}$ & $S_{m_{nor}}$ \\ \hline
+original parameters  &            &           &              &              &                  &                  &             &               &                \\ \hline
+estimated parameters & $1.75\pm4$ & $.76\pm3$ & $.87\pm3$    & $.39\pm2$    & $0.31\pm1.8$     & $4.18\pm1.5$     & $19.9\pm 6$ & $6.69\pm2$    & $.76\pm 1.8$   \\ \hline
 \end{tabular}
 \end{table} 
 %\begin{table}[]
