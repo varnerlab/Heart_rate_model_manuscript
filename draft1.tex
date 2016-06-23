@@ -63,7 +63,9 @@ where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of ti
 From the original values provided by Olufsen and Ottesen, we found that $h_0$ was the most sensitive parameter, followed by $N$, $m_{ach}$, and $m_{nor}$ in that order. Of the four most sensitive equations, three of them ($h_0$, $m_{ach}$ and $m_{nor}$) appear directly in the equation for heart rate, and $N$ indirectly appears, as both $c_{ach}$ and $c_{nor}$ are functions of $N$.
 The four parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}.
 \subsubsection*{Multiobjective Sensitivity} 
-For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph}.
+For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph} for both clusters, but $N$ is about two times as sensitive in cluster 2 as in cluster one, whereass $h_0$ has nearly the same sensitivity for both clusters. If one were to rank the parameters by sensitivity, the ordering of the four most sensitive parameters between the two clusters is idenitical, however, $\tau_{nor}$ in cluster 2 is approximately an order of magnitude less sensitive than in cluster 1 and $\tau_{ach}$ is nearly three orders of magnitude less senstivie in cluster 2 compared to cluster 1.
+
+If we were to compare to the parameters estimated by Nelder Mead, we find similar sensitivites in $h_0$ and $N$ as well as in $m_{ach}$ and $m_{nor}$. The sensitivities in all of the $\tau$s included in the model is much smaller in the multiobjective case than in the single objective case. Part of this difference in sensitivity may arise from the differences in value found for these parameters by the different methods of optimization.
 \section*{Discussion}
 The Discussion should be succinct and must not contain subheadings.
 \section*{Methods}
@@ -126,7 +128,7 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 \end{figure}
 \begin{figure}[ht]
        \centering
-       \includegraphics[width=\linewidth]{figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBars}
+       \includegraphics[width=\linewidth]{figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBarsJun22}
        \caption{The black circles are from cluster 1, the grey x's represent cluster 2. Error bars are omitted for the sake of clarity.}
         \label{fig:MultiobjectiveSensitivityGraph}
 \end{figure} 
