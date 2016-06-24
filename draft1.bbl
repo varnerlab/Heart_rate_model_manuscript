@@ -26,6 +26,11 @@
 \newblock \bibinfo{title}{Reflexes that control cardiovascular function}
   (\bibinfo{year}{1999}).
 
+\bibitem{boron2016medical}
+\bibinfo{author}{Boron, W.~F.} \& \bibinfo{author}{Boulpaep, E.~L.}
+\newblock \emph{\bibinfo{title}{Medical physiology}}
+  (\bibinfo{publisher}{Elsevier Health Sciences}, \bibinfo{year}{2016}).
+
 \bibitem{olufsen2013practical}
 \bibinfo{author}{Olufsen, M.~S.} \& \bibinfo{author}{Ottesen, J.~T.}
 \newblock \bibinfo{title}{A practical approach to parameter estimation applied

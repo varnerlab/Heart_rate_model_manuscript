@@ -1,49 +1,49 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: draft1.aux
 The style file: naturemag.bst
 Database file #1: draft1.bib
 Warning--I didn't find a database entry for "ottesen1996non"
 Warning--empty journal in negative1999reflexes
-You've used 10 entries,
+You've used 11 entries,
             2348 wiz_defined-function locations,
-            1049 strings with 10936 characters,
-and the built_in function-call counts, 3983 in all, are:
-= -- 291
-> -- 96
+            1053 strings with 11031 characters,
+and the built_in function-call counts, 4268 in all, are:
+= -- 307
+> -- 104
 < -- 0
-+ -- 48
-- -- 24
-* -- 476
-:= -- 446
-add.period$ -- 29
-call.type$ -- 10
++ -- 52
+- -- 26
+* -- 508
+:= -- 474
+add.period$ -- 31
+call.type$ -- 11
 change.case$ -- 10
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 362
-empty$ -- 359
-format.name$ -- 31
-if$ -- 794
+cite$ -- 12
+duplicate$ -- 387
+empty$ -- 394
+format.name$ -- 34
+if$ -- 857
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 81
-newline$ -- 57
-num.names$ -- 10
-pop$ -- 63
+int.to.str$ -- 11
+missing$ -- 88
+newline$ -- 61
+num.names$ -- 11
+pop$ -- 75
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 71
+skip$ -- 79
 stack$ -- 0
 substring$ -- 196
-swap$ -- 354
+swap$ -- 376
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 26
-width$ -- 12
-write$ -- 114
+while$ -- 27
+width$ -- 13
+write$ -- 122
 (There were 2 warnings)
