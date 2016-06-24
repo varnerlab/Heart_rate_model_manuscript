@@ -61,7 +61,7 @@ S_{0j}(t) = \frac{1}{n_s}p_j \left(\sum_{k=1}^{n_t} \sum_{i=1}^{n_s} \left[ \fra
 where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of time points available for that patient. We calculated sensitivites of parameters that were optimized and not that of those held constant.
 \subsubsection*{Single Objective Sensitivity}
 From the original values provided by Olufsen and Ottesen, we found that $h_0$ was the most sensitive parameter, followed by $N$, $m_{ach}$, and $m_{nor}$ in that order. Of the four most sensitive equations, three of them ($h_0$, $m_{ach}$ and $m_{nor}$) appear directly in the equation for heart rate, and $N$ indirectly appears, as both $c_{ach}$ and $c_{nor}$ are functions of $N$.
-The four parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}.
+The four parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}. Between the estimated and the original parameters, the sensitivity of $h_0$ barely changed, but $N$ became much less sensitive in the estimated parameter set and $m_{ach}$ increased in sensitivity. This appearent change in sensitivity originates from the method of calculation, where the sum is divided by the value of the parameter. As $N$ increased in the estimated parameter set, dividing by this new value decreased the overal state sensitivity coefficent, while the opposite is true for $m_{ach}$.
 \subsubsection*{Multiobjective Sensitivity} 
 For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph} for both clusters, but $N$ is about two times as sensitive in cluster 2 as in cluster one, whereass $h_0$ has nearly the same sensitivity for both clusters. If one were to rank the parameters by sensitivity, the ordering of the four most sensitive parameters between the two clusters is idenitical, however, $\tau_{nor}$ in cluster 2 is approximately an order of magnitude less sensitive than in cluster 1 and $\tau_{ach}$ is nearly three orders of magnitude less senstivie in cluster 2 compared to cluster 1.
 
@@ -187,13 +187,14 @@ Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \te
 
 \begin{table}[h]
 \centering
+\scriptsize
 \caption{Average Overall State Sensitivity Coefficents For Single Objective Case}
 \label{tab:OSSCsoriginalParams}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
 \hline
-Parameter set        & $S_{N}$    & $S_{k_1}$ & $S_{\tau_1}$ & $S_{\tau_2}$ & $S_{\tau_{ach}}$ & $S_{\tau_{nor}}$ & $S_{h_0}$   & $S_{m_{ach}}$ & $S_{m_{nor}}$ \\ \hline
-original parameters  &            &           &              &              &                  &                  &             &               &                \\ \hline
-estimated parameters & $1.75\pm4$ & $.76\pm3$ & $.87\pm3$    & $.39\pm2$    & $0.31\pm1.8$     & $4.18\pm1.5$     & $19.9\pm 6$ & $6.69\pm2$    & $.76\pm 1.8$   \\ \hline
+Parameter set        & $S_{N}$     & $S_{k_1}$      & $S_{\tau_1}$  & $S_{\tau_2}$   & $S_{\tau_{ach}}$ & $S_{\tau_{nor}}$ & $S_{h_0}$   & $S_{m_{ach}}$ & $S_{m_{nor}}$ \\ \hline
+original parameters  & $15.26\pm4$ & $.0792\pm .04$ & $.0739\pm.04$ & $.0156\pm.004$ & $.0540\pm.013$   & $5.5E-4\pm4E-4$ & $19.9\pm 6$ & $.574\pm.7$   & $14.6\pm4$    \\ \hline
+estimated parameters & $2.09\pm5$  & $.83\pm3$      & $1.11\pm3$    & $.48\pm2$      & $0.43\pm2$       & $4.18\pm1.6$     & $19.8\pm 6$ & $6.69\pm2$    & $.71\pm 1.6$  \\ \hline
 \end{tabular}
 \end{table} 
 %\begin{table}[]
