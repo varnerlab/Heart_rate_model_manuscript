@@ -5,6 +5,11 @@
 \providecommand{\bibinfo}[2]{#2}
 \providecommand{\eprint}[2][]{\url{#2}}
 
+\bibitem{boron2016medical}
+\bibinfo{author}{Boron, W.~F.} \& \bibinfo{author}{Boulpaep, E.~L.}
+\newblock \emph{\bibinfo{title}{Medical physiology}}
+  (\bibinfo{publisher}{Elsevier Health Sciences}, \bibinfo{year}{2016}).
+
 \bibitem{olshansky2008parasympathetic}
 \bibinfo{author}{Olshansky, B.}, \bibinfo{author}{Sabbah, H.~N.},
   \bibinfo{author}{Hauptman, P.~J.} \& \bibinfo{author}{Colucci, W.~S.}
@@ -26,10 +31,13 @@
 \newblock \bibinfo{title}{Reflexes that control cardiovascular function}
   (\bibinfo{year}{1999}).
 
-\bibitem{boron2016medical}
-\bibinfo{author}{Boron, W.~F.} \& \bibinfo{author}{Boulpaep, E.~L.}
-\newblock \emph{\bibinfo{title}{Medical physiology}}
-  (\bibinfo{publisher}{Elsevier Health Sciences}, \bibinfo{year}{2016}).
+\bibitem{oparil2003pathogenesis}
+\bibinfo{author}{Oparil, S.}, \bibinfo{author}{Zaman, M.~A.} \&
+  \bibinfo{author}{Calhoun, D.~A.}
+\newblock \bibinfo{title}{Pathogenesis of hypertension}.
+\newblock \emph{\bibinfo{journal}{Annals of internal medicine}}
+  \textbf{\bibinfo{volume}{139}}, \bibinfo{pages}{761--776}
+  (\bibinfo{year}{2003}).
 
 \bibitem{olufsen2013practical}
 \bibinfo{author}{Olufsen, M.~S.} \& \bibinfo{author}{Ottesen, J.~T.}
