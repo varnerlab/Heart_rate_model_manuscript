@@ -97,4 +97,13 @@
   Sciences of the United States of America}} \textbf{\bibinfo{volume}{101}},
   \bibinfo{pages}{13210--13215} (\bibinfo{year}{2004}).
 
+\bibitem{du2007love}
+\bibinfo{author}{Du, Y.-H.} \& \bibinfo{author}{Chen, A.~F.}
+\newblock \bibinfo{title}{A “love triangle” elicited by electrochemistry:
+  complex interactions among cardiac sympathetic afferent, chemo-, and
+  baroreflexes}.
+\newblock \emph{\bibinfo{journal}{Journal of Applied Physiology}}
+  \textbf{\bibinfo{volume}{102}}, \bibinfo{pages}{9--10}
+  (\bibinfo{year}{2007}).
+
 \end{thebibliography}

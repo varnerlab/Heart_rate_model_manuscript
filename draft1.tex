@@ -71,7 +71,9 @@ For the multiobjective case, we used the same finite differences, but averaged t
 
 If we were to compare to the parameters estimated by Nelder Mead, we find similar sensitivites in $h_0$ and $N$ as well as in $m_{ach}$ and $m_{nor}$. The sensitivities in all of the $\tau$s included in the model is much smaller in the multiobjective case than in the single objective case. Part of this difference in sensitivity may arise from the differences in value found for these parameters by the different methods of optimization.
 \section*{Discussion}
-The Discussion should be succinct and must not contain subheadings.
+We estimated three sets of parameters that can be used to predict heart rates of patients in intensive care units. The accuracy of the model was much improved when patients were grouped by their characterstics. 
+
+The model used has several shortcommings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} Nevertheless, it does captures the dynamics of the system at short time scales.
 \section*{Methods}
 All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. 
 \bibliography{draft1}
