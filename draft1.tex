@@ -76,6 +76,8 @@ We estimated three sets of parameters that can be used to predict heart rates of
 The model used has several shortcommings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} Nevertheless, it does captures the dynamics of the system at short time scales.
 \section*{Methods}
 All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. 
+
+Since pressure data was given in a discrete format, we linearly interpolated between values when neccessary, as pressure is an input to the system of differential equations.
 \bibliography{draft1}
 \section*{Acknowledgements (not compulsory)}
 Acknowledgements should be brief, and should not include thanks to anonymous referees and editors, or effusive comments. Grant or contribution numbers may be acknowledged.
@@ -211,11 +213,11 @@ Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \te
 \label{tab:OSSCsoriginalParams}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-Parameter set        & $S_{\alpha}$ & $S_{N}$     & $S_{M}$        & $S_{k_1}$      & $S_{k_2}$      & $S_{\tau_1}$  & $S_{\tau_2}$   & $S_{\tau_{ach}}$ & $S_{\tau_{nor}}$ & $S_{\beta}$  & $S_{h_0}$   & $S_{m_{ach}}$ & $S_{m_{nor}}$ & $S_{\tau_d}$     \\ \hline
+Parameter set        & $S_{\alpha}$ & $S_{N}$     & $S_{M}$        & $S_{k_1}$      & $S_{k_2}$      & $S_{\tau_1}$  & $S_{\tau_2}$   & $S_{\tau_{ach}}$ & $S_{\tau_{nor}}$ & $S_{\beta}$   & $S_{h_0}$   & $S_{m_{ach}}$ & $S_{m_{nor}}$ & $S_{\tau_d}$     \\ \hline
 original parameters  & $3.99\pm 2$  & $15.26\pm4$ & $.0069\pm.002$ & $.0792\pm .04$ & $142.61\pm 30$ & $.0739\pm.04$ & $.0156\pm.004$ & $.0540\pm.013$   & $0.00055\pm4E-4$ & $.113\pm.13$ & $19.9\pm 6$ & $.574\pm.7$   & $14.6\pm4$    & $.085\pm.09$     \\ \hline
-estimated parameters & $70\pm200$   & $2.24\pm5$  & $.322\pm.6$    & $.89\pm3$      & $108\pm400$    & $1.20\pm4$    & $.61\pm3$      & $0.52\pm2$       & $4.34\pm1.9$     & $.234\pm.19$ & $20.1\pm 6$ & $6.79\pm2$    & $.83\pm 1.9$  & $2.08E-7\pm2E-7$ \\ \hline
+estimated parameters & $78\pm250$   & $2.24\pm5$  & $.329\pm.6$    & $.89\pm3$      & $86\pm400$     & $1.20\pm4$    & $.61\pm3$      & $0.52\pm2$       & $4.34\pm1.9$     & $.52\pm5$    & $20.1\pm 6$ & $6.79\pm2$    & $.83\pm 1.9$  & $4.13E-7\pm3E-6$ \\ \hline
 \end{tabular}
-\end{table} 
+\end{table}
 %\begin{table}[]
 %\centering
 %\caption{Sensitivity by clusters}
