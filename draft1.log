@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.23)  6 JUL 2016 09:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.23)  7 JUL 2016 08:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1121,13 +1121,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 233.
  ) 
 Here is how much of TeX's memory you used:
- 11851 strings out of 493029
- 175793 string characters out of 6136234
- 428814 words of memory out of 5000000
+ 11854 strings out of 493029
+ 175820 string characters out of 6136234
+ 429933 words of memory out of 5000000
  14934 multiletter control sequences out of 15000+600000
- 70166 words of font info for 237 fonts, out of 8000000 for 9000
+ 70285 words of font info for 239 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,45p,881b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,45p,1072b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -1140,9 +1140,9 @@ live/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.
 pfb>
-Output written on draft1.pdf (13 pages, 848098 bytes).
+Output written on draft1.pdf (13 pages, 848573 bytes).
 PDF statistics:
- 427 PDF objects out of 1000 (max. 8388607)
+ 428 PDF objects out of 1000 (max. 8388607)
  220 compressed objects within 3 object streams
  41 named destinations out of 1000 (max. 500000)
  42550 words of extra memory for PDF output out of 42996 (max. 10000000)
