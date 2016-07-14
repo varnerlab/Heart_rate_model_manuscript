@@ -71,13 +71,15 @@ For the multiobjective case, we used the same finite differences, but averaged t
 
 If we were to compare to the parameters estimated by Nelder Mead, we find similar sensitivites in $h_0$ and $N$ as well as in $m_{ach}$ and $m_{nor}$. The sensitivities in all of the $\tau$s included in the model is much smaller in the multiobjective case than in the single objective case. Part of this difference in sensitivity may arise from the differences in value found for these parameters by the different methods of optimization.
 \section*{Discussion}
-We estimated three sets of parameters that can be used to predict heart rates of patients in intensive care units. The accuracy of the model was much improved when patients were grouped by their characterstics. 
+We estimated three sets of parameters that can be used to predict heart rates of patients in intensive care units. The accuracy of the model was much improved when patients were grouped by their characterstics. This improvement in accuracy is likely mostly based on that the resting heart rate of the patients in clusters more accurately matched $h_0$, the resting heart rate in the model, since $h_0$ was shown to be the most sensitive parameter in the model. 
+
+We discovered that one of the parameters found to be fairly unsensitive in previous work, $k_2$, was surprisingly sensitive in this work. It was held constant during optimization as previous work pointed to it being a very unsensitive parameter, but it proved to be very sensitive in all cases. Future work may involve estimating a better value for the gain on this type of barroreceptor. 
 
 The model used has several shortcommings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} Nevertheless, it does captures the dynamics of the system at short time scales.
 \section*{Methods}
-All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. 
+All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. Single objective optimization was perfomed using the Nelder Mead algorithm, as implimented in the Julia package NLopt, and multiobjective optimization was performed using the POETs package. 
 
-Since pressure data was given in a discrete format, we linearly interpolated between values when neccessary, as pressure is an input to the system of differential equations.
+Since pressure data was given in a discrete format, we linearly interpolated between values when neccessary, as pressure is an input to the system of differential equations. We used the pressure data recorded at 1 Hz as well as the heart rate data at 1 Hz from the MIMIC II Waveform Database, numerics section. We extracted data from the database using rdsamp and stored it locally as text files that were then read into the model.
 \bibliography{draft1}
 \section*{Acknowledgements (not compulsory)}
 Acknowledgements should be brief, and should not include thanks to anonymous referees and editors, or effusive comments. Grant or contribution numbers may be acknowledged.
@@ -137,7 +139,7 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 \begin{figure}[ht]
        \centering
        \includegraphics[width=\linewidth]{figures/MultiobjectiveSenstivityGraph10familiesofNoErrorBarsWithExtendedSensivities}
-       \caption{The black marks are from cluster 1, the grey markss represent cluster 2. Error bars are omitted for the sake of clarity. Parameters represented by an square were allowed to vary, and parameters represented by a diamond were held constant.}
+       \caption{The black marks are from cluster 1, the grey marks represent cluster 2. Error bars are omitted for the sake of clarity. Parameters represented by an square were allowed to vary, and parameters represented by a diamond were held constant.}
         \label{fig:MultiobjectiveSensitivityGraph}
 \end{figure} 
 \begin{figure}[ht]
