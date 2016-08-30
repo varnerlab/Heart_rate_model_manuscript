@@ -29,6 +29,29 @@ Olufsen and Ottesen have developed models of heart rate based on blood pressure 
 We used the MIMIC II Waveform Database as the source of the pressure and heart rate data used to test this model.\cite{saeed2011multiparameter} MIMIC contains de-identified data from patients who visited the Beth Israel Deaconess Medical Center ICU. This database contains a wealth of information: diagnoses, demographics, clinical data, such as heart rate and intravenous medications as well as laboratory results.  
 A subset of the MIMIC II Waveform Database has been linked to patients found in the MIMIC II Database, allowing us to combine the waveforms with demographic information. From this subset, we selected patients that had numerics records with data recorded once per second with more than five data points available in the first 10 minutes of recorded data, giving us 273 patients meeting this criteria.
 To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
+\subsection{Model Formulation}
+The model assumes changes in arterial wall stretch are proportionate to filtered blood pressure, $\dot{\bar{p}} = \alpha(-\bar p + p)$
+where $\alpha$ is a gain, $\bar p$ is the filtered blood pressure, and $p$ is the patient's measured blood pressure.
+From $\bar p$, we can predict the nervous system firing rate, $n = \sum_i n_i + N,~i = 1,2$
+where N is a baseline firing rate and $n_i$ corresponds to the firing rate of nerve fibers of type $i$.
+The firing rates for nerves of type $i$ are computed as:
+\begin{equation}
+\frac{dn_i}{dt} = \kappa_i \frac{d \bar p}{dt} \frac{n(M-n)}{(M/2)^2}-\frac{n_i}{\tau_i}, i = 1,2
+\end{equation}
+where $M$ is the maximum firing rate, and $\tau_i$ is the time scale for nerves of type $i$.
+The firing rate information is compiled by the central nervous system, which then determines the the sympathetic and parasympathetic outputs, $f_{sym}$ and $f_{par}$, respectively.
+The parasympathetic output is given by $f_{par} = n/M$, while sympathetic output takes the form:
+\begin{equation}
+f_{sym} = \frac{1-n(t-\tau_d)/M}{1+\beta f_{par}}
+\end{equation}
+With these outputs, we can determine the dimensionless concentrations of acetylcholine, $c_{ach}$ and noradrenaline, $c_{nor}$:
+\begin{equation}
+\label{dcnordt}
+\frac{dc_{j}}{dt} = \frac{f_{i}-c_{j}}{\tau_{j}}
+\end{equation}
+where each $\tau_{j}$ represents a time scale.
+Finally, the heart rate is calculated from $h_0$, the intrinsic heart rate, and $m_{nor}$ and $m_{ach}$,
+which are weights for the contributions of acetylcholine and norepinephrine to heart rate $h = h_0(1+m_{nor}c_{nor} - m_{ach}c_{ach})$.
 \section*{Results}
 \subsection*{One Dimensional Optimization of Parameters}
 We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package NLopt. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in Table \ref{tab:SingleParamsNLopt}. %The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in Figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. The change in parameters reduced the mean squared error, averaged over all of the selected patients, from 1167 to 349.
@@ -75,7 +98,7 @@ We estimated three sets of parameters that can be used to predict heart rates of
 
 We discovered that one of the parameters found to be fairly unsensitive in previous work, $k_2$, was surprisingly sensitive in this work. It was held constant during optimization as previous work pointed to it being a very unsensitive parameter, but it proved to be very sensitive in all cases. Future work may involve estimating a better value for the gain on this type of barroreceptor. 
 
-The model used has several shortcommings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} Nevertheless, it does captures the dynamics of the system at short time scales.
+The model used has several shortcomings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} The model only considers two vassoctive agents when there are many more and does not attempt to capture the effects of respiration rate.  Nevertheless, it does captures the dynamics of the system at short time scales.
 \section*{Methods}
 All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. Single objective optimization was perfomed using the Nelder Mead algorithm, as implimented in the Julia package NLopt, and multiobjective optimization was performed using the POETs package. 
 
