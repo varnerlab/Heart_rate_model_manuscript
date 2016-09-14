@@ -5,45 +5,45 @@ The style file: naturemag.bst
 Database file #1: draft1.bib
 Warning--I didn't find a database entry for "ottesen1996non"
 Warning--empty journal in negative1999reflexes
-You've used 13 entries,
+You've used 15 entries,
             2348 wiz_defined-function locations,
-            1070 strings with 11428 characters,
-and the built_in function-call counts, 5073 in all, are:
-= -- 367
-> -- 124
+            1086 strings with 11802 characters,
+and the built_in function-call counts, 5879 in all, are:
+= -- 429
+> -- 140
 < -- 0
-+ -- 62
-- -- 31
-* -- 611
-:= -- 562
-add.period$ -- 37
-call.type$ -- 13
-change.case$ -- 12
++ -- 70
+- -- 35
+* -- 711
+:= -- 652
+add.period$ -- 43
+call.type$ -- 15
+change.case$ -- 14
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 459
-empty$ -- 466
-format.name$ -- 41
-if$ -- 1015
+cite$ -- 16
+duplicate$ -- 528
+empty$ -- 542
+format.name$ -- 46
+if$ -- 1175
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 105
-newline$ -- 71
-num.names$ -- 13
-pop$ -- 86
+int.to.str$ -- 15
+missing$ -- 121
+newline$ -- 81
+num.names$ -- 15
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 90
+skip$ -- 100
 stack$ -- 0
-substring$ -- 237
-swap$ -- 450
+substring$ -- 293
+swap$ -- 519
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 33
-width$ -- 15
-write$ -- 144
+while$ -- 39
+width$ -- 17
+write$ -- 166
 (There were 2 warnings)

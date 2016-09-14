@@ -97,6 +97,23 @@
   Sciences of the United States of America}} \textbf{\bibinfo{volume}{101}},
   \bibinfo{pages}{13210--13215} (\bibinfo{year}{2004}).
 
+\bibitem{morris1991factorial}
+\bibinfo{author}{Morris, M.~D.}
+\newblock \bibinfo{title}{Factorial sampling plans for preliminary
+  computational experiments}.
+\newblock \emph{\bibinfo{journal}{Technometrics}}
+  \textbf{\bibinfo{volume}{33}}, \bibinfo{pages}{161--174}
+  (\bibinfo{year}{1991}).
+
+\bibitem{sumner2012methodology}
+\bibinfo{author}{Sumner, T.}, \bibinfo{author}{Shephard, E.} \&
+  \bibinfo{author}{Bogle, I.}
+\newblock \bibinfo{title}{A methodology for global-sensitivity analysis of
+  time-dependent outputs in systems biology modelling}.
+\newblock \emph{\bibinfo{journal}{Journal of The Royal Society Interface}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{2156--2166}
+  (\bibinfo{year}{2012}).
+
 \bibitem{du2007love}
 \bibinfo{author}{Du, Y.-H.} \& \bibinfo{author}{Chen, A.~F.}
 \newblock \bibinfo{title}{A “love triangle” elicited by electrochemistry:
