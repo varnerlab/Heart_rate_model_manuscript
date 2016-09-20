@@ -2,7 +2,15 @@ This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: draft1.aux
 The style file: naturemag.bst
+White space in argument---line 43 of file draft1.aux
+ : \citation{1_normal
+ :                    sum distribution}
+I'm skipping whatever remains of this command
 Database file #1: draft1.bib
+I was expecting a `,' or a `}'---line 176 of file draft1.bib
+ : @misc{1_normal 
+ :                sum distribution,[break] url={http://mathworld.wolfram.com/NormalSumDistribution.html},[break] urldate={2016-9-20},[break] journal={Mathworld.wolfram.com},[break] year={2016}
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "ottesen1996non"
 Warning--empty journal in negative1999reflexes
 You've used 15 entries,
@@ -46,4 +54,4 @@ warning$ -- 1
 while$ -- 39
 width$ -- 17
 write$ -- 166
-(There were 2 warnings)
+(There were 2 error messages)
