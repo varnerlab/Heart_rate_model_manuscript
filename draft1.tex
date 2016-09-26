@@ -3,7 +3,7 @@
 \title{Scientific Reports Title to see here (20 words or less)}
 \author[1]{Rachel LeCover}
 \author[1,*]{Jeffrey D. Varner}
-\affil[1]{Affiliation, School of Chemical and Biomolecular Engineering, Ithaca NY, 14852, USA}
+\affil[1]{School of Chemical and Biomolecular Engineering, Ithaca NY, 14852, USA}
 \affil[*]{jdv27@cornell.edu}
 %\keywords{Keyword1, Keyword2, Keyword3}
 \begin{abstract}
@@ -21,11 +21,8 @@ Example Abstract. Abstract must be under 200 words and not include subheadings o
 \section*{Introduction}
 The rate at which a heart beats is determined, in part, by the sympathetic and parasympathetic portions of the nervous system. When the sympathetic nervous system is stimulated, it releases epinephrine and norepinephrine. Norepinephrine increases heart rate by increasing the rate of depolarization in pacemaker cells and increases contractability through the phosphorlation of several types of receptors.\cite{boron2016medical} The parasympathetic system releases acetylcholine which decreases heart rate and contractibility through its binding to M$_2$ receptors.  These two systems, often described as an accelerator and a brake, are not totally independent on each other, rather, they interact through second messengers cAMP and cGMP. \cite{olshansky2008parasympathetic}
 Heart rate is also controlled by the baroreflex system. The baroreflex system consists of baroreceptors, tension sensitive nerve endings found in the circulatory system. \cite{ottesen1997modelling} When they sense a change in pressure, they cause a change in the frequency of nerve activity. When pressure (and stretch) rapidly increase, so does the baroreceptor firing rate. \cite{negative1999reflexes} This effects of this signal are not instantaneous, rather, there is a time delay on the order of seconds before the sympathetic and parasympathetic nervous systems respond. \cite{ottesen1997modelling}
-
 This control process leads to a negative feedback loop, where if the mean arterial pressure increases, vasodilation and bradycardia occur, whereas if the mean arterial pressure decreases, the opposite, vasoconstriction and tachycardia occur. \cite{boron2016medical} In patients suffering from hypertension, the controlers in this loop get reset to the higher pressure, but the set point can be changed again where blood pressure returns to normal levels. \cite{oparil2003pathogenesis}
-
 Olufsen and Ottesen have developed models of heart rate based on blood pressure measurements.\cite{olufsen2013practical} From the blood pressure measurement, the model predicts a firing rate for different types of receptors, which is then used to predict the response times of the parasympathetic and sympathetic nervous system. The response times are then used to predict dimensionless norepinephrine and acetylcholine concentrations, which are finally used to predict heart rate. 
-
 We used the MIMIC II Waveform Database as the source of the pressure and heart rate data used to test this model.\cite{saeed2011multiparameter} MIMIC contains de-identified data from patients who visited the Beth Israel Deaconess Medical Center ICU. This database contains a wealth of information: diagnoses, demographics, clinical data, such as heart rate and intravenous medications as well as laboratory results.  
 A subset of the MIMIC II Waveform Database has been linked to patients found in the MIMIC II Database, allowing us to combine the waveforms with demographic information. From this subset, we selected patients that had numerics records with data recorded once per second with more than five data points available in the first 10 minutes of recorded data, giving us 273 patients meeting this criteria.
 To our knowledge, this is the first study to attempt to model heart rate as a function of blood pressure for such a large number of patients. Additionally, many previous studies were performed with healthy patients, in contrast, this study focuses on intensive care unit patients. 
@@ -54,24 +51,18 @@ Finally, the heart rate is calculated from $h_0$, the intrinsic heart rate, and 
 which are weights for the contributions of acetylcholine and norepinephrine to heart rate $h = h_0(1+m_{nor}c_{nor} - m_{ach}c_{ach})$.
 \section*{Results}
 \subsection*{One Dimensional Optimization of Parameters}
-We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package NLopt. We forced all of the parameters to be non-negative as to be biologically correct.The original and estimated values of the parameters are shown in Table \ref{tab:SingleParamsNLopt}. %The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in Figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. The change in parameters reduced the mean squared error, averaged over all of the selected patients, from 1167 to 349.
-
-Within the estimated parameter set, the value of $N$, the baseline firing rate increased, and both $k_1$ and $\tau_1$, representing a change in the response rate of the faster firing baroreceptors in the model. Baroreceptors are generally divided into three groups, depending on their transmission speeds (on the order of half a second, five seonds, and five hundred seconds), but this model only includes two types. \cite{ottesen1996non} The increase in $\tau_1$ and the decrease in $\tau_2$ in the estimated parameter set may be the result of oversimplification. 
-
+We minimized averaged the mean squared error per patient using the Nelder Mead algorithm as implemented in Julia package NLopt. We forced all of the parameters to be non-negative as to be biologically correct. The original and estimated values of the parameters are shown in Table \ref{tab:SingleParamsNLopt}. %The value of $\tau_2$ decreased dramatically in the estimated parameter set, increasing the effect of $n_1$ on the firing rate. Additionally, $\tau_{ach}$ increased significantly, reducing the changes in $c_{ach}$. As shown in Figure \ref{fig:paramscomparsion}, the estimated parameters tend to smooth out the varaibility in the predicted heart rate compared to the original parameters. The change in parameters reduced the mean squared error, averaged over all of the selected patients, from 1167 to 349.
+Within the estimated parameter set, the value of $N$, the baseline firing rate increased, and both $k_1$ and $\tau_1$, representing a change in the response rate of the faster firing baroreceptors in the model. Baroreceptors are generally divided into three groups, depending on their transmission speeds (on the order of half a second, five seconds, and five hundred seconds), but this model only includes two types. \cite{ottesen1996non} The increase in $\tau_1$ and the decrease in $\tau_2$ in the estimated parameter set may be the result of oversimplification. 
 The baseline heart rate ($h_0$) decreased slightly, to 88 bpm, from the initial 100 bpm. Both $\tau_{ach}$ and $m_{ach}$, which determine how acetylcholine plays into the model, decreased dramatically in the estimated parameter set, with the reduction in $m_{ach}$ reducing the effects of a change in acetylcholine on heart rate, and the decrease in $\tau_{ach}$ increasing the rate of acetylcholine change. The estimated parameter set reduced the averaged mean squared error to 352 from 1167. As seen in Figure \ref{fig:paramscomparsionNLopt}, the estimated parameters slightly overestimate heart rate for this patient, but they perform far better than the original parameters, which severely underestimate the heart rate. This behavior is typical of the model on patients in this study.
-
-$k_2$ and $\beta$ were held constant as to reduce the search space, as done by Olufsen and Ottesen. Additionally, when they were allowed to vary during the optimization, the parameter set generated had very small values for $m_{ach}$ and $m_{nor}$, resulting in a predicted heart rate that was basically constant at $h_0$. While this set of the parameters did mimimize the MSE, it did not capture the intrinsic varation in heart rate. $\alpha$, the parameter used to smooth the pressure data was held constant at 1.5 to smooth the data with a minimal phase shift. The maximum firing rate, $M$, was held constant, as it only appears in this system of equations by normalizing $n$. The sympathetic nervous system delay, $\tau_d$, was held constant, owing to the propagation of discontinuities. \cite{baker1997pitfalls}
-
-
+$k_2$ and $\beta$ were held constant as to reduce the search space, as done by Olufsen and Ottesen. Additionally, when they were allowed to vary during the optimization, the parameter set generated had very small values for $m_{ach}$ and $m_{nor}$, resulting in a predicted heart rate that was basically constant at $h_0$. While this set of the parameters did minimize the MSE, it did not capture the intrinsic variation in heart rate. $\alpha$, the parameter used to smooth the pressure data was held constant at 1.5 to smooth the data with a minimal phase shift. The maximum firing rate, $M$, was held constant, as it only appears in this system of equations by normalizing $n$. The sympathetic nervous system delay, $\tau_d$, was held constant, owing to the propagation of discontinuities. \cite{baker1997pitfalls}
 \subsection*{Clustering}
 We clustered the patients based on their age, average heart rate, and SAPS (Simplified Acute Physiology) score, a measure that estimates a patient's risk of death within an intensive care unit.\cite{le1993new} We used the patient's average SAPS since some patients had multiple admissions resulting in more than one blood pressure-heart rate track. 
 Through the use of the Clustering Julia package, we created up to 26 clusters based on these variables, and scored each cluster with the sum of its silhouettes, where a higher score means that each member of the cluster is more similar to the other members of the clusters.\cite{rousseeuw1987silhouettes} We found that grouping the patients into two clusters gave the highest score and therefore the best clustering. The sum of silhouettes as a function of number of clusters is shown in \ref{fig:sumofsils}, and the patients by cluster in \ref{fig:clusteredpatients}. Cluster 1 patients (n = 165), shown in white, tend to have a lower average heart rate (73 BPM compared to 88 BPM), and be older than patients in cluster 2 (n = 108) (69 years vs 59 years, on average). 
 \subsection*{Multidimensional Optimization}
-We used the Julia language POETs package, which combines simulated anealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. We used the parameter families from the slower cooling for further analysis. 
+We used the Julia language POETs package, which combines simulated annealing with Pareto optimality to generate families of best parameters.\cite{bassen2016jupoets} Using the two clusters formed by k-means, we minimized the averaged mean squared error to create these parameter families. We utilized a monotonically decreasing cooling schedule with five iterations at each temperature. The trade off curve generated using $\alpha$ = .9 is shown in \ref{fig:tradeoffcurve}, and with $\alpha$ =.5  in \ref{fig:tradeoffcurveslower}. We used the parameter families from the slower cooling for further analysis. 
 To decrease the time necessary to perform the simulated annealing, we utilized Julia's transparent parallelization capabilities. With the @parallel (+) operator, we were able to calculate patient's mean squarred errors in parallel. The speed up from parallelization is shown in \ref{fig:executiontime}. 
 We then selected the ten best sets of parameters from each cluster to examine the performance of the model with the new parameters. A sample patient from cluster 1 is shown in \ref{fig:cluster1patientmulti}, and from cluster 2 in \ref{fig:cluster2patientmulti}. The new parameter families reduced the averaged mean squared error even further than the parameters estimated using Nelder Mead-the ten best families for cluster 1 reduced the averaged mean squared error to 135 or less, and for cluster two, the averaged mean squared error was reduced to 178, or less. 
-
-Both of the families had fairly similar values for $m_{nor}$ and $m_{ach}$, however, cluster 1 had a larger value of $N$, the resting firing rate than cluster 2. Cluster 1 contains the older patients, on average, suggesting that the resting firing rate may be age dependent. The differences in average heart rate between the clusters apparent in the clustering are appearent in the difference in $h_0$ between the two clusters, with cluster 2 having a faster base line heart rate, at $1.749 \pm .05$ beats per second, corresponding to $104.95 \pm 3$ beats per minute, compared to $74.4 \pm 4$ beats per minute for cluster 1.
+Both of the families had fairly similar values for $m_{nor}$ and $m_{ach}$, however, cluster 1 had a larger value of $N$, the resting firing rate than cluster 2. Cluster 1 contains the older patients, on average, suggesting that the resting firing rate may be age dependent. The differences in average heart rate between the clusters apparent in the clustering are apparent in the difference in $h_0$ between the two clusters, with cluster 2 having a faster base line heart rate, at $1.749 \pm .05$ beats per second, corresponding to $104.95 \pm 3$ beats per minute, compared to $74.4 \pm 4$ beats per minute for cluster 1.
  
 \subsection*{Local Sensitivity Using Finite Differences}
 The derivatives of all parameters were estimated using central differences. 
@@ -83,62 +74,50 @@ To collapse the time dimension, we calculated overall state sensitivity coeffici
 \begin{equation}
 S_{0j}(t) = \frac{1}{n_s}p_j \left(\sum_{k=1}^{n_t} \sum_{i=1}^{n_s} \left[ \frac{1}{x_i} \frac{dx_i(t_k)}{dp_j} \right]^2 \right)^{1/2}
 \end{equation}
-where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of time points available for that patient. We calculated sensitivites of parameters that were optimized and not that of those held constant.
+where $n_s$ = 1, as $h$ is the only state variable and $n_t$ is the number of time points available for that patient. We calculated sensitivities of parameters that were optimized and not that of those held constant.
 \subsubsection*{Single Objective Sensitivity}
 From the original values provided by Olufsen and Ottesen, we found that $h_0$ was the most sensitive parameter, followed by $N$, $m_{ach}$, and $m_{nor}$ in that order, of the parameters estimated. Of the four most sensitive equations, three of them ($h_0$, $m_{ach}$ and $m_{nor}$) appear directly in the equation for heart rate, and $N$ indirectly appears, as both $c_{ach}$ and $c_{nor}$ are functions of $N$.
-The four estimated parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}. However, $k_2$ showed a very high degree of sensitivity in both the original and estimated parameter set, even more so than any of the estimated parameters. It also had the highest varriance in sensitivity, due to the fact that some patients exhibited a sensitivity to $k_2$ that was an order of magnitude larger than the mean. 
-
-Between the estimated and the original parameters, the sensitivity of $h_0$ barely changed, but $N$ became much less sensitive in the estimated parameter set and $m_{ach}$ increased in sensitivity. This appearent change in sensitivity originates from the method of calculation, where the sum is divided by the value of the parameter. As $N$ increased in the estimated parameter set, dividing by this new value decreased the overal state sensitivity coefficent, while the opposite is true for $m_{ach}$.
+The four estimated parameters that were the most sensitive in our study were among the five most sensitive parameters found by Olufsen and Ottesen, as seen in \ref{tab:OSSCsoriginalParams}. However, $k_2$ showed a very high degree of sensitivity in both the original and estimated parameter set, even more so than any of the estimated parameters. It also had the highest variance in sensitivity, due to the fact that some patients exhibited a sensitivity to $k_2$ that was an order of magnitude larger than the mean. 
+Between the estimated and the original parameters, the sensitivity of $h_0$ barely changed, but $N$ became much less sensitive in the estimated parameter set and $m_{ach}$ increased in sensitivity. This apparent change in sensitivity originates from the method of calculation, where the sum is divided by the value of the parameter. As $N$ increased in the estimated parameter set, dividing by this new value decreased the overall state sensitivity coefficient, while the opposite is true for $m_{ach}$.
 \subsubsection*{Multiobjective Sensitivity} 
-For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph} for both clusters, but $N$ is about two times as sensitive in cluster 2 as in cluster one, whereass $h_0$ has nearly the same sensitivity for both clusters. If one were to rank the parameters by sensitivity, the ordering of the four most sensitive parameters between the two clusters is idenitical, however, $\tau_{nor}$ in cluster 2 is approximately an order of magnitude less sensitive than in cluster 1 and $\tau_{ach}$ is nearly three orders of magnitude less senstivie in cluster 2 compared to cluster 1. Of the parameters held constant during optimization, $k_2$ showed the highest degree of sensitivity in both clusters, which corresponds to the sensitivity found in the single objective case.
-
-If we were to compare to the parameters estimated by Nelder Mead, we find similar sensitivites in $h_0$ and $N$ as well as in $m_{ach}$ and $m_{nor}$. The sensitivities in all of the $\tau$s included in the model is much smaller in the multiobjective case than in the single objective case. Part of this difference in sensitivity may arise from the differences in value found for these parameters by the different methods of optimization.
-
+For the multiobjective case, we used the same finite differences, but averaged them not only over the patients, but over the families of parameters-the ten best for each cluster. As with the single objective case, $h_0$ is the most sensitive parameter, followed by $N$, as seen in \ref{fig:MultiobjectiveSensitivityGraph} for both clusters, but $N$ is about two times as sensitive in cluster 2 as in cluster one, whereass $h_0$ has nearly the same sensitivity for both clusters. If one were to rank the parameters by sensitivity, the ordering of the four most sensitive parameters between the two clusters is identical, however, $\tau_{nor}$ in cluster 2 is approximately an order of magnitude less sensitive than in cluster 1 and $\tau_{ach}$ is nearly three orders of magnitude less sensitive in cluster 2 compared to cluster 1. Of the parameters held constant during optimization, $k_2$ showed the highest degree of sensitivity in both clusters, which corresponds to the sensitivity found in the single objective case.
+If we were to compare to the parameters estimated by Nelder Mead, we find similar sensitivities in $h_0$ and $N$ as well as in $m_{ach}$ and $m_{nor}$. The sensitivities in all of the $\tau$s included in the model is much smaller in the multiobjective case than in the single objective case. Part of this difference in sensitivity may arise from the differences in value found for these parameters by the different methods of optimization.
 \subsection{Global Sensitivity}
-We used the Morris method of sampling to generate a family of parameter sets, ranging from $\pm$25\% of the nominal parameter values, with the exception of $h_0$, which was bounded between [.8, 2.0], corresponding to a resting heart rate between 48 and 120 bpm.\cite{morris1991factorial} We found that this range of parameters resulted in physiologically acceptable heart rates. As heart rates are a function of time, it was neccessary for us to collapse the time dimension to perform sensitivity analysis. We used fPCA (functional principal component analysis) to convert the heart rate curves into weights ($\omega_i$) and eigenfunctions $(\xi_i(t))$ so that $h_j(t)=\sum_i \omega_i \xi_i(t)$, and then performed sensitivity analysis on the weights generated for each patient. \cite{sumner2012methodology} We then grouped the patients by cluster, and calculated the average of $\mu^*$, the estimate of the mean of distrubution of the absolute values of the elementry effects. For each cluster, we calculated the overall standard deviation, $\sigma$, by summing all of the variances and then taking the square root. \cite{1_normal sum distribution} The results are shown in \ref{fig:Cluster1Morris} and \ref{fig:Cluster2Morris}. The results are nearly identical between the two clusters, with the ranking of the six most sensitive paramaters (as given by the largest values of $\mu^*$) being the same in both clusters, with $m_{nor}$ being the parameter with the largest effect on the model's output. The parameter with the largest standard deviation, indicative of it depending on other paramters in the model, was the resting heart rate. 
-
+We used the Morris method of sampling to generate a family of parameter sets, ranging from $\pm$25\% of the nominal parameter values, with the exception of $h_0$, which was bounded between [.8, 2.0], corresponding to a resting heart rate between 48 and 120 bpm.\cite{morris1991factorial} We found that this range of parameters resulted in physiologically acceptable heart rates. As heart rates are a function of time, it was necessary for us to collapse the time dimension to perform sensitivity analysis. We used fPCA (functional principal component analysis) to convert the heart rate curves into weights ($\omega_i$) and eigenfunctions $(\xi_i(t))$ so that $h_j(t)=\sum_i \omega_i \xi_i(t)$, and then performed sensitivity analysis on the weights generated for each patient. \cite{sumner2012methodology} We then grouped the patients by cluster, and calculated the average of $\mu^*$, the estimate of the mean of distribution of the absolute values of the elementary effects. For each cluster, we calculated the overall standard deviation, $\sigma$, by summing all of the variances and then taking the square root. \cite{1_normal sum distribution} The results are shown in \ref{fig:Cluster1Morris} and \ref{fig:Cluster2Morris}. The results are nearly identical between the two clusters, with the ranking of the six most sensitive parameters (as given by the largest values of $\mu^*$) being the same in both clusters, with $h_0$ being the parameter with the largest effect on the model's output. It was also the parameter with the largest standard deviation, indicitive of it depending on the other parameters in the model. This agrees with the results of the local sensitivity analysis, where $h_0$ was the parameter with the largest impact on the model's output. However, two parameters, ($N$ and $k_2$), which showed high sensitivity in the local case, did not in the global case, but $m_{ach}$, which was sensitive in the local case was also found to be a strong determinant of output in the global case.
+%, with $m_{nor}$ being the parameter with the largest effect on the model's output. The parameter with the largest standard deviation, indicative of it depending on other parameters in the model, was the resting heart rate. It is somewhat surprising that $m_{nor}$ is the most sensitive parameter, as it was not the most sensitive in the local sensitivity analyses, but it was among four most sensitive in both the local sensitivity analyses for the clusters, as well the original parameter set.
 \section*{Discussion}
-We estimated three sets of parameters that can be used to predict heart rates of patients in intensive care units. The accuracy of the model was much improved when patients were grouped by their characterstics. This improvement in accuracy is likely mostly based on that the resting heart rate of the patients in clusters more accurately matched $h_0$, the resting heart rate in the model, since $h_0$ was shown to be the most sensitive parameter in the model. 
-
-We discovered that one of the parameters found to be fairly unsensitive in previous work, $k_2$, was surprisingly sensitive in this work. It was held constant during optimization as previous work pointed to it being a very unsensitive parameter, but it proved to be very sensitive in all cases. Future work may involve estimating a better value for the gain on this type of barroreceptor. 
-
-The model used has several shortcomings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sypathetic afferrent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} The model only considers two vassoctive agents when there are many more and does not attempt to capture the effects of respiration rate.  Nevertheless, it does captures the dynamics of the system at short time scales.
+We estimated three sets of parameters that can be used to predict heart rates of patients in intensive care units. The accuracy of the model was much improved when patients were grouped by their characteristics. This improvement in accuracy is likely mostly based on that the resting heart rate of the patients in clusters more accurately matched $h_0$, the resting heart rate in the model, since $h_0$ was shown to be the most sensitive parameter in the model. 
+We discovered that one of the parameters found to be fairly insensitive in previous work, $k_2$, was surprisingly sensitive in this work. It was held constant during optimization as previous work pointed to it being a very insensitive parameter, but it proved to be very sensitive in all cases. Future work may involve estimating a better value for the gain on this type of barroreceptor. 
+The model used has several shortcomings. This model oversimplifies the process of heart rate regulation. It does not include cardiac sympathetic afferent reflex, which is sensitive to both mechanical and chemical inputs. \cite{du2007love} It can only be used for short time scales, as it does not include the slower acting renin-agiotensin-aldostrone system, which determines blood volume, and therefore blood pressure. \cite{boron2016medical} The model only considers two vassoctive agents when there are many more and does not attempt to capture the effects of respiration rate.  Nevertheless, it does captures the dynamics of the system at short time scales.
 \section*{Methods}
-All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. Single objective optimization was perfomed using the Nelder Mead algorithm, as implimented in the Julia package NLopt, and multiobjective optimization was performed using the POETs package. FPCA calculations were carried out through the use of the Rcall package using the R package FDApace. 
-
-Since pressure data was given in a discrete format, we linearly interpolated between values when neccessary, as pressure is an input to the system of differential equations. We used the pressure data recorded at 1 Hz as well as the heart rate data at 1 Hz from the MIMIC II Waveform Database, numerics section. We extracted data from the database using rdsamp and stored it locally as text files that were then read into the model.
+All calculations were carried out Ubunutu 16.04 using Julia version .0.4.5, with 7.7 GB of available RAM on a Intel Core i7-6700 CPU @ 3.40GHz. Differential equations were solved using the ODE package, with solvers ode23 and ode78, with an absolute and relative tolerance of $10^{-8}$. Single objective optimization was performed using the Nelder Mead algorithm, as implimented in the Julia package NLopt, and multiobjective optimization was performed using the POETs package. FPCA calculations were carried out through the use of the Rcall package using the R package FDApace. 
+Since pressure data was given in a discrete format, we linearly interpolated between values when necessary, as pressure is an input to the system of differential equations. We used the pressure data recorded at 1 Hz as well as the heart rate data at 1 Hz from the MIMIC II Waveform Database, numerics section. We extracted data from the database using rdsamp and stored it locally as text files that were then read into the model.
 \bibliography{draft1}
 \section*{Acknowledgements (not compulsory)}
 Acknowledgements should be brief, and should not include thanks to anonymous referees and editors, or effusive comments. Grant or contribution numbers may be acknowledged.
 \section*{Author contributions statement}
-Must include all authors, identified by initials, for example:
-A.A. conceived the experiment(s),  A.A. and B.A. conducted the experiment(s), C.A. and D.A. analysed the results.  All authors reviewed the manuscript. 
+R.L. conducted the experiments, R.L. and J.V. analysed the results.  All authors reviewed the manuscript. 
 \section*{Additional information}
 To include, in this order: \textbf{Accession codes} (where applicable); \textbf{Competing financial interests} (mandatory statement). 
 The corresponding author is responsible for submitting a \href{http://www.nature.com/srep/policies/index.html#competing}{competing financial interests statement} on behalf of all authors of the paper. This statement must be included in the submitted article file.
-
 %\begin{figure}[ht]
 %                \centering
 %        \includegraphics[width=\linewidth]{figures/paramscomparisons28611-3108-03-06-18-24n}
 %       \caption{The black xs are the measured heart rate, the dark gray is the model prediction using the original parameters and the light gray is the model prediction using the original parameters.}
 %       \label{fig:paramscomparsion}
 %\end{figure}
-
 \begin{figure}[ht]
                 \centering
         \includegraphics[width=\linewidth]{figures/s27193-3271-03-15-13-26n}
        \caption{The black xs are the measured heart rate, the dark gray is the model prediction using the original parameters and the light gray is the model prediction using the original parameters.}
        \label{fig:paramscomparsionNLopt}
 \end{figure}
-
-
 \begin{figure}[ht]
                 \centering
         \includegraphics[width=\linewidth]{figures/2clusters}
        \caption{The patients, clustered into two groups.}
        \label{fig:clusteredpatients}
 \end{figure}
-
 \begin{figure}[ht]
                 \centering
         \includegraphics[width=\linewidth]{figures/timedatausingdifferentparamsetsforpatients28611-3018-03-06-18-24n}
@@ -181,22 +160,18 @@ The corresponding author is responsible for submitting a \href{http://www.nature
        \caption{The black dots represent the rank 0, or best parameter sets, and the grey dots represent rank 1-4 parameter sets.}
        \label{fig:tradeoffcurveslower}
 \end{figure}
-
 \begin{figure}[ht]
                 \centering
-        \includegraphics[width=\linewidth]{figures/MorrisPlotN100Cluster1}
-       \caption{Cluster 1 Morris Plot, with N =100}
+        \includegraphics[width=\linewidth]{figures/MorrisPlotN20Cluster1}
+       \caption{Cluster 1 Morris Plot, with N =20}
        \label{fig:Cluster1Morris}
 \end{figure}
-
 \begin{figure}[ht]
                 \centering
-        \includegraphics[width=\linewidth]{figures/MorrisPlotN100Cluster2}
-       \caption{Cluster 2 Morris Plot, with N =100}
+        \includegraphics[width=\linewidth]{figures/MorrisPlotN20Cluster2}
+       \caption{Cluster 2 Morris Plot, with N =20}
        \label{fig:Cluster2Morris}
 \end{figure}
-
-
 %\begin{table}[ht]
 %\centering
 %\caption{Original and estimated parameter values. The bolded parameters were held constant.}
@@ -208,7 +183,6 @@ The corresponding author is responsible for submitting a \href{http://www.nature
 %Parameter Estimations from MIMIC II  Data & 1.5               & 75.319 & 120          & 2.299 & 0.5            & 1.345    & 0.126    & 250.339      & 3.185        & 6                & 1.412 & 0.160     & 2.35E-06  & 7                 \\ \hline
 %\end{tabular}
 %\end{table}
-
 \begin{table}[ht]
 \centering
 \scriptsize
@@ -221,7 +195,6 @@ Original Value                            & \textbf{1.5}      & 75     & \textbf
 Parameter Estimations from MIMIC II  Data & \textbf{1.5}      & 107.33 & \textbf{120} & 41.139 & \textbf{0.5}   & 14.062   & 202.925  & 2.94E-05     & 8.156        & \textbf{6}       & 1.474 & 0.165     & 5.20E-02  & \textbf{7}        \\ \hline
 \end{tabular}
 \end{table}
-
 \begin{table}[]
 \centering
 \scriptsize
@@ -234,8 +207,6 @@ Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \te
 2       & \textbf{1.5}      & $37.98\pm 9$ & \textbf{120} & $1.379\pm .7$  & \textbf{0.5}   & $.3621\pm .11$ & $82.88\pm 33$   & $.1410\pm .06$ & $.1688\pm.04$  & \textbf{6}       & $1.749\pm.05$   & $.1609\pm.02$  & $.0962\pm .06$  & \textbf{7}        \\ \hline
 \end{tabular}
 \end{table}
-
-
 %\begin{table}[h]
 %\centering
 %\scriptsize
@@ -248,11 +219,10 @@ Cluster & \textbf{$\alpha$} & $N$          & \textbf{$M$} & $k_1$          & \te
 %estimated parameters & $2.24\pm5$  & $.89\pm3$      & $1.20\pm4$    & $.61\pm3$      & $0.52\pm2$       & $4.34\pm1.9$     & $20.1\pm 6$ & $6.79\pm2$    & $.83\pm 1.9$  \\ \hline
 %\end{tabular}
 %\end{table} 
-
 \begin{table}[h]
 \centering
 \tiny
-\caption{Average Overall State Sensitivity Coefficents For Single Objective Case}
+\caption{Average Overall State Sensitivity Coefficients For Single Objective Case}
 \label{tab:OSSCsoriginalParams}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
